@@ -309,6 +309,7 @@ static bool AnalyzeFile(FILE *in)
     QuickPrint=false;
     NextBlockIsCString=false;
 
+printf("Char,InCMode,EscPoint,InLineComment,InStr,InComment,CommentEscPoint\n");
     while((bytes=fread(m_LineBuffer,1,sizeof(m_LineBuffer),in))>0)
     {
         CurPos=m_LineBuffer;
@@ -316,7 +317,7 @@ static bool AnalyzeFile(FILE *in)
         {
             c=*CurPos++;
 
-//printf("%c,%d,%d\n",c<32?'.':c,InCMode,EscPoint);
+printf("\n%c,%d,%d,%d,%d,%d,%d,",(c<32 || c>126)?'.':c,InCMode,EscPoint,InLineComment,InStr,InComment,CommentEscPoint);
 
             /* Ignore \r */
             if(c=='\r')
@@ -433,7 +434,10 @@ static bool AnalyzeFile(FILE *in)
                                 case 1: // Looking for '/'
                                     if(c=='/')
                                         InComment=false;
-                                    CommentEscPoint=0;
+                                    if(c=='*')
+                                        CommentEscPoint=1;  // Stay in comment esc point
+                                    else
+                                        CommentEscPoint=0;
                                 break;
                             }
                         }
