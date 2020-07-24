@@ -1,0 +1,40 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+
+struct ExtLink
+{
+    const char *URL;
+    const char *Name;
+    const char *Desc;
+};
+
+struct ExtLink m_ExtLinks[]=
+{
+    {"http://bittyhttp.com","BittyHTTP","A simple C web server"},
+    {"https://github.com/TheBeef/BittyHTTP","GitHub/BittyHTTP","The Bitty HTTP GitHub page"},
+};
+
+void Page_Links(void)
+{
+    int l;
+
+    StartPage(NULL,NULL);
+
+?>
+    <table>
+    <? for(l=0;l<sizeof(m_ExtLinks)/sizeof(struct ExtLink);l++)
+       {
+    ?>
+        <tr>
+            <td><a href='<?=m_ExtLinks[l].URL?>'><?=m_ExtLinks[l].Name?></a></td>
+            <td><?=m_ExtLinks[l].Desc?></td>
+        </tr>
+    <? } ?>
+    </table>
+
+<?
+    EndPage();
+}
+
+?>

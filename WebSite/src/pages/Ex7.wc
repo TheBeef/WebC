@@ -1,0 +1,87 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+#include "Utils.h"
+
+const char *Ex7HTML= =?>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Short Tag</title>
+    </head>
+    <body>
+        `wc wcecho("This is the normal open tag"); $<br/>
+        ` wcecho("This is the short tag"); $<br/>
+    </body>
+</html>
+<?wc ;
+
+const char *Ex7CCode= =?>
+#include "WCWebAPI.h"
+
+void Page_ShortTag(void)
+{
+    wcecho("<!DOCTYPE HTML>\n"
+        "<html>\n"
+        "   <head>\n"
+        "       <title>Short Tag</title>\n"
+        "   </head>\n"
+        "   <body>\n");
+    wcecho("This is the normal open tag");
+    wcecho("<br/>\n");
+    wcecho("This is the short tag");
+    wcecho("<br/>\n");
+    wcecho("   </body>\n"
+        "</html>\n");
+}
+
+<? ;
+
+const char *Ex7Output= =?>
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <title>Short Tag</title>
+   </head>
+   <body>
+        This is the normal open tag<br/>
+        This is the short tag<br/>
+   </body>
+</html> <? ;
+
+void Page_Ex7(void)
+{
+
+    StartPage(NULL,NULL);
+
+?>
+<h2>Description</h2>
+<p>This example shows using the short tag to start a C block.</p>
+
+<p>A short tag <span class='CodeFrag'>&lt;?</span> is the same as
+a normal <span class='CodeFrag'>&lt;?wc</span> but shorter.</p>
+
+<p>There are two similar open tags mainly to remain comparable to php.  The
+second reason is that XML also starts with a
+<span class='CodeFrag'>&lt;?</span> making it hard to output the starting
+tag.  A compile switch maybe added to disable the short version.</p>
+
+<h2>WebC Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex7HTML); ?>
+</pre>
+
+<h2>C Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex7CCode); ?>
+</pre>
+
+<h2>Output</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex7Output); ?>
+</pre>
+
+<?wc
+
+    EndPage();
+}

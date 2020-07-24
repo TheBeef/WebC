@@ -1,0 +1,18 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+#include <stdio.h>
+
+void Page_Contact(void)
+{
+    StartPage(NULL,NULL);
+?>
+
+Contact info...
+<pre>
+You can contact me by email at paul@bittyhttp.com
+You can also access the project page on GitHub at https://github.com/TheBeef/BittyHTTP
+</pre>
+<?
+    EndPage();
+}

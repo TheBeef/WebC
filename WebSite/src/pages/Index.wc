@@ -1,0 +1,49 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+#include <stdio.h>
+
+void Page_Index(void)
+{
+    StartPage(NULL,NULL);
+?>
+
+<p>WebC is a new open source C extension language that is especially suited
+for web development in the C programming language for embedded systems.</p>
+
+<p>Nice, but what does that mean? An example:</p>
+
+<h3>Example #1 An introductory example</h3>
+<pre class='Code'>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Example&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?wc
+            wcecho("Hi, I'm a WebC program!");
+        ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Instead of lots of commands to output HTML (as seen in normal C), WebC pages
+contain HTML with embedded C code that does "something" (in this case, output
+"Hi, I'm a WebC program!"). The WebC code is enclosed in special start and
+end processing instructions &lt;?wc and ?&gt; that allow you to jump
+into and out of "C mode".</p>
+
+<p>What distinguishes WebC from other script languages (like PHP) is that it
+is compiled C code (or C++ if you like that better).  This is great for limited
+resource embedded applications where code size and speed are important.</p>
+
+<p>The best thing in using WebC is that it makes working with HTML
+in C <b>bearable</b>.</p>
+
+<p>You should check out the <? OutputLink(e_Page_Examples,"Examples"); ?> to
+see how WebC is used.</p>
+
+<?
+    EndPage();
+}

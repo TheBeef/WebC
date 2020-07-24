@@ -1,0 +1,28 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+#include <stdio.h>
+
+void Page_Downloads(void)
+{
+    StartPage(NULL,NULL);
+?>
+
+Downloads...
+
+<pre>
+ * Current Version
+     * Compiler
+        * Source
+        * Bin
+            * Linux
+            * Windows
+     * Examples
+ * Past Versions
+ * Web site
+
+</pre>
+
+<?
+    EndPage();
+}

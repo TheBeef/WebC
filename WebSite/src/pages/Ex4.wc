@@ -1,0 +1,86 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+#include "Utils.h"
+
+const char *Ex4HTML= =?>
+`wc
+const char *UserName="Ben";
+$
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Short Echo Tag</title>
+    </head>
+    <body>
+        Hello `=UserName$ welcome to WebC!
+    </body>
+</html> <? ;
+
+const char *Ex4CCode= =?>
+#include "WCWebAPI.h"
+
+const char *UserName="Example";
+
+void Page_ShortEchoTag(void)
+{
+    wcecho("<!DOCTYPE HTML>\n"
+        "<html>\n"
+        "   <head>\n"
+        "       <title>Short Echo Tag</title>\n"
+        "   </head>\n"
+        "   <body>\n");
+        "       Hello ");
+    wcecho(UserName);
+    wcecho(" welcome to WebC!\n"
+    wcecho("   </body>\n"
+        "</html>\n");
+}
+<? ;
+
+const char *Ex4Output= =?>
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <title>Short Echo Tag</title>
+   </head>
+   <body>
+       Hello Ben welcome to WebC!
+   </body>
+</html> <? ;
+
+void Page_Ex4(void)
+{
+
+    StartPage(NULL,NULL);
+
+//<span class='CodeFrag'>?&gt;</span>
+?>
+<h2>Description</h2>
+<p>This example shows short echo tags.  These are tags that start with a
+<span class='CodeFrag'>&lt;?=</span> instead of the normal
+<span class='CodeFrag'>&lt;?wc</span>.  WebC will automaticly add a
+<span class='CodeFrag'>wcecho(</span> before rest of the C code.  WebC will
+then close this C block with just a <span class='CodeFrag'>);</span>.
+This lets you output strings / string variables quickly without having to write
+<span class='CodeFrag'>wcecho(string);</span>.</p>
+
+<h2>WebC Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex4HTML); ?>
+</pre>
+
+<h2>C Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex4CCode); ?>
+</pre>
+
+<h2>Output</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex4Output); ?>
+</pre>
+
+<?wc
+
+    EndPage();
+}

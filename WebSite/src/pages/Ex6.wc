@@ -1,0 +1,116 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+#include "Utils.h"
+
+const char *Ex6HTML= =?>
+`wc
+
+void RepeatAfterMe(int Times,const char *String);
+
+void MyPageFunction(void)
+{
+$
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Page Functions</title>
+    </head>
+    <body>
+        `wc RepeatAfterMe(4,"Four is good<br/>"); $
+    </body>
+</html> `wc ;
+}
+
+void RepeatAfterMe(int Times,const char *String)
+{
+    int r;
+
+    for(r=0;r<Times;r++)
+        wcecho(String);
+}
+$
+
+<?wc ;
+
+const char *Ex6CCode= =?>
+#include "WCWebAPI.h"
+
+void RepeatAfterMe(int Times,const char *String);
+
+void MyPageFunction(void)
+{
+    wcecho("<!DOCTYPE HTML>\n"
+        "<html>\n"
+        "   <head>\n"
+        "       <title>Page Functions</title>\n"
+        "   </head>\n"
+        "   <body>\n");
+    RepeatAfterMe(4,"Four is good<br/>");
+    wcecho("   </body>\n"
+        "</html>\n");
+}
+
+void RepeatAfterMe(int Times,const char *String)
+{
+    int r;
+
+    for(r=0;r<Times;r++)
+        wcecho(String);
+}
+
+<? ;
+
+const char *Ex6Output= =?>
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <title>Page Functions</title>
+   </head>
+   <body>
+        Four is good<br/>
+        Four is good<br/>
+        Four is good<br/>
+        Four is good<br/>
+   </body>
+</html> <? ;
+
+void Page_Ex6(void)
+{
+
+    StartPage(NULL,NULL);
+
+//<span class='CodeFrag'>?&gt;</span>
+?>
+<h2>Description</h2>
+<p>This example shows a more complex use of WebC.  There are times when you
+don't want WebC to provide the function declaration, instead wanting to
+provide it your self.</p>
+
+<p>The rule that WebC follows is that if you start an HTML block inside of
+a function (or any scope) then WebC will not write the function declaration
+and you must provide it your self.</p>
+
+<p>This is use full if you want to place any of your function after your
+main HTML block or want to have a different naming convention that what WebC
+noramlly does.</p>
+
+<h2>WebC Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex6HTML); ?>
+</pre>
+
+<h2>C Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex6CCode); ?>
+</pre>
+
+<h2>Output</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex6Output); ?>
+</pre>
+
+<?wc
+
+    EndPage();
+}

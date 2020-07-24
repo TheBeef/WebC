@@ -1,0 +1,19 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+
+void Page_About(void)
+{
+    StartPage(NULL,NULL);
+?>
+
+<pre>
+Stuff goes here...
+    * Why
+    * 
+
+</pre>
+
+<?
+    EndPage();
+}

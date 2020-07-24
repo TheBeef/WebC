@@ -1,0 +1,81 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+#include "Utils.h"
+
+const char *Ex1HTML= =?>
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <title>Hello World</title>
+   </head>
+   <body>
+       `wc wcecho("Hello World"); $
+   </body>
+</html> <? ;
+
+const char *Ex1CCode= =?>
+#include "WCWebAPI.h"
+
+void Page_HelloWorld(void)
+{
+    wcecho("<!DOCTYPE HTML>\n"
+        "<html>\n"
+        "   <head>\n"
+        "       <title>Hello World</title>\n"
+        "   </head>\n"
+        "   <body>\n");
+    wcecho("Hello World");
+    wcecho("   </body>\n"
+        "</html>\n");
+}
+<? ;
+
+const char *Ex1Output= =?>
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <title>Hello World</title>
+   </head>
+   <body>
+       Hello World
+   </body>
+</html> <? ;
+
+void Page_Ex1(void)
+{
+
+    StartPage(NULL,NULL);
+
+?>
+<h2>Description</h2>
+<p>This is a basic Hello World program.  It shows that WebC starts in HTML mode
+and then switches to C mode when it hits a <span class='CodeFrag'>&lt;?wc</span>
+.  It continues in C mode until it hits the closing
+<span class='CodeFrag'>?&gt;</span>.</p>
+
+<p>You can also see the generated C code.  The C code writes a function
+named Page_<span style='color:green'>Filename</span>.  Where Filename is the name
+of the .wc file.  The C code then calls <span class='CodeFrag'>wcecho()</span>
+function (which you must provide) to write the string out to the web server.
+And finally the C page function is closed (}).</p>
+
+<h2>WebC Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex1HTML); ?>
+</pre>
+
+<h2>C Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex1CCode); ?>
+</pre>
+
+<h2>Output</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex1Output); ?>
+</pre>
+
+<?wc
+
+    EndPage();
+}

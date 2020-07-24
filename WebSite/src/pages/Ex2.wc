@@ -1,0 +1,95 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+#include "Utils.h"
+
+const char *Ex2HTML= =?>
+`wc
+#include <math.h>
+#include <stdio.h>
+
+double value=2;
+$
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Globals</title>
+    </head>
+    <body>
+        `wc
+        char buff[100];
+        sprintf(buff,"sqrt(%f)=%f",value,sqrt(value));
+        wcecho(buff);
+        $
+    </body>
+</html> <? ;
+
+const char *Ex2CCode= =?>
+#include "WCWebAPI.h"
+#include <math.h>
+#include <stdio.h>
+
+double value=2;
+
+void Page_SQRT(void)
+{
+    wcecho("<!DOCTYPE HTML>\n"
+        "<html>\n"
+        "   <head>\n"
+        "       <title>Globals</title>\n"
+        "   </head>\n"
+        "   <body>\n");
+    char buff[100];
+    sprintf(buff,"sqrt(%f)=%f",value,sqrt(value));
+    wcecho(buff);
+    wcecho("   </body>\n"
+        "</html>\n");
+}
+<? ;
+
+const char *Ex2Output= =?>
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <title>Globals</title>
+   </head>
+   <body>
+       sqrt(2.000000)=1.414214
+   </body>
+</html> <? ;
+
+void Page_Ex2(void)
+{
+
+    StartPage(NULL,NULL);
+
+//<span class='CodeFrag'>?&gt;</span>
+?>
+<h2>Description</h2>
+<p>This example shows using the global space at the top of a WebC file.
+When the first line of a WebC program is <span class='CodeFrag'>&lt;?wc</span>
+then instead of starting the page function WebC instead places this code
+into global space.</p>
+
+<p>You can also see that C99 variables are used to declare the
+<span class='CodeFrag'>buff</span> buffer in the middle of the function.</p>
+
+<h2>WebC Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex2HTML); ?>
+</pre>
+
+<h2>C Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex2CCode); ?>
+</pre>
+
+<h2>Output</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex2Output); ?>
+</pre>
+
+<?wc
+
+    EndPage();
+}

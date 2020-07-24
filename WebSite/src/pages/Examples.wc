@@ -1,0 +1,26 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+
+void Page_Examples(void)
+{
+    StartPage(NULL,NULL);
+
+    wcecho("<h2>WebC Coding Examples</h2>");
+    wcecho("<ul>");
+    wcecho("<li>");OutputLink(e_Page_Ex1,"Hello World");wcecho("</li>");
+    wcecho("<li>");OutputLink(e_Page_Ex2,"Globals");wcecho("</li>");
+    wcecho("<li>");OutputLink(e_Page_Ex3,"Graphic Files");wcecho("</li>");
+    wcecho("<li>");OutputLink(e_Page_Ex4,"Short Echo Tag");wcecho("</li>");
+    wcecho("<li>");OutputLink(e_Page_Ex5,"Strings");wcecho("</li>");
+    wcecho("<li>");OutputLink(e_Page_Ex6,"Page Functions");wcecho("</li>");
+    wcecho("<li>");OutputLink(e_Page_Ex7,"Short Tag");wcecho("</li>");
+    wcecho("</ul>");
+
+    wcecho("<h2>Compiling Examples</h2>");
+    wcecho("<ul>");
+    wcecho("<li>");OutputLink(e_Page_ExMakefile,"Makefile");wcecho("</li>");
+    wcecho("</ul>");
+
+    EndPage();
+}

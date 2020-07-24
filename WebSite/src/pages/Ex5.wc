@@ -1,0 +1,91 @@
+<?wc
+#include "Pages.h"
+#include "pages/header.h"
+#include "Utils.h"
+
+const char *Ex5HTML= =?>
+`wc
+const char *HTML = =$<p>
+This is all HTML.  You can use things like "quotes" and newlines
+and it will be added to the C string.
+</p><?;
+$
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Strings</title>
+    </head>
+    <body>
+        ` wcecho(HTML); $
+    </body>
+</html> <? ;
+
+const char *Ex5CCode= =?>
+#include "WCWebAPI.h"
+
+const char *HTML = "<p>\n"
+        "This is all HTML.  You can use things like \"quotes\" and newlines\n"
+        "and it will be added to the C string.\n"
+        "</p>";
+
+void Page_Strings(void)
+{
+    wcecho("<!DOCTYPE HTML>\n"
+        "<html>\n"
+        "   <head>\n"
+        "       <title>Strings</title>\n"
+        "   </head>\n"
+        "   <body>\n");
+    wcecho(HTML);
+    wcecho("   </body>\n"
+        "</html>\n");
+}
+<? ;
+
+const char *Ex5Output= =?>
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <title>Strings</title>
+   </head>
+   <body>
+        <p>
+        This is all HTML.  You can use things like "quotes" and newlines
+        and it will be added to the C string.
+        </p>
+   </body>
+</html> <? ;
+
+void Page_Ex5(void)
+{
+
+    StartPage(NULL,NULL);
+
+//<span class='CodeFrag'>?&gt;</span>
+?>
+<h2>Description</h2>
+<p>This example shows use of the WebC strings.  Normally when enter a HTML block
+WebC wraps that block with a <span class='CodeFrag'>wcecho()</span>.  You can
+also end a block with a <span class='CodeFrag'>=?&gt;</span>.  This marks the
+HTML block as a string.  Instead of a <span class='CodeFrag'>wcecho()</span>
+instead the block will only be quoted into a string.
+
+<h2>WebC Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex5HTML); ?>
+</pre>
+
+<h2>C Code</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex5CCode); ?>
+</pre>
+
+<h2>Output</h2>
+<pre class='Code'>
+<?wc OutputHTMLExampleCode(Ex5Output); ?>
+</pre>
+
+<?wc
+
+    EndPage();
+}

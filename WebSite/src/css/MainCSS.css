@@ -1,0 +1,83 @@
+body
+{
+    background-color:white;
+    color:#364d59;
+    margin:0;
+    padding:0;
+}
+
+a
+{
+    color:#364D59;
+}
+
+.MainHeader
+{
+    background-color:#00A651;
+    box-shadow:0 0.5rem 1rem rgba(0,0,0,0.15);
+    color:#364D59;
+    font-size:16px;
+    font-weight:300;
+    line-height:27.2px;
+    padding:16px 15px;
+}
+
+.MainHeader ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.MainHeader ul li
+{
+    display: inline-block;
+    min-width: 60px;
+    color:white;
+    padding-right:45px;
+}
+
+.MainHeader ul li a
+{
+    color:white;
+    text-decoration: none;
+}
+
+.MainHeader ul li a:hover
+{
+    text-decoration: underline;
+}
+
+div.MainBody
+{
+    padding:0 10px;
+}
+
+.Code
+{
+    border:1px solid black;
+    margin:5px;
+    background-color:#E7E7E7;
+    color:black;
+    padding:5px;
+}
+
+.CodeFrag
+{
+    border:1px solid black;
+    background-color:#E7E7E7;
+    color:black;
+    padding:0 1px;
+}
+
+.BreadCrumbs
+{
+    color:#252525;
+    font-size: 0.8em;
+    margin: 10px 0;
+}
+
+.HighlightCode
+{
+    color:green;
+}

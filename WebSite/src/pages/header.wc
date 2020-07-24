@@ -1,0 +1,69 @@
+<?
+#include "Pages.h"
+#include "pages/header.h"
+#include <stdlib.h>
+#include <stdbool.h>
+
+void OutputBreadCrumbs(e_PageType CurPage,bool First);
+
+void StartPage(const char *ExtraHEAD,const char *OverrideTitle)
+{
+    wcecho("<!DOCTYPE HTML>\n");
+    wcecho("<html>\n");
+    wcecho("<head>\n");
+    if(ExtraHEAD!=NULL)
+        wcecho(ExtraHEAD);
+    wcecho("<title>");
+    if(OverrideTitle!=NULL)
+        wcecho(OverrideTitle);
+    else
+        wcecho(g_Pages[g_PageID].Title);
+    wcecho("</title>");
+    wcecho("<link rel = \"stylesheet\" type = \"text/css\" href = \"/css/MainCSS.css\" />\n");
+?>
+</head>
+<body>
+<div class='MainHeader'>
+<ul>
+    <li><? OutputLink(e_Page_Index,"Home");?></li>
+    <li><? OutputLink(e_Page_Examples,"Examples");?></li>
+    <li><? OutputLink(e_Page_Downloads,"Downloads");?></li>
+    <li><? OutputLink(e_Page_Links,"Links");?></li>
+    <li><? OutputLink(e_Page_About,"About");?></li>
+    <li><? OutputLink(e_Page_Contact,"Contact");?></li>
+</ul>
+</div>
+<div class="MainBody">
+<div class='BreadCrumbs'>
+<? OutputBreadCrumbs(g_PageID,true); ?>
+</div>
+<h1><?=g_Pages[g_PageID].Title ?></h1>
+<?
+}
+
+void EndPage(void)
+{
+    wcecho("</div>\n");
+    wcecho("</body>\n");
+    wcecho("</html>\n");
+}
+
+void OutputBreadCrumbs(e_PageType CurPage,bool First)
+{
+    if(CurPage==e_PageMAX)
+        return;
+
+    OutputBreadCrumbs(g_Pages[CurPage].Parent,false);
+
+    if(!First)
+    {
+        OutputLink(CurPage,g_Pages[CurPage].Title);
+        wcecho(" &#187; ");
+    }
+    else
+    {
+        wcecho(g_Pages[CurPage].Title);
+    }
+}
+
+?>
