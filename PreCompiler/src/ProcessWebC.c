@@ -309,7 +309,7 @@ static bool AnalyzeFile(FILE *in)
     QuickPrint=false;
     NextBlockIsCString=false;
 
-printf("Char,InCMode,EscPoint,InLineComment,InStr,InComment,CommentEscPoint\n");
+//printf("Char,InCMode,EscPoint,InLineComment,InStr,InComment,CommentEscPoint\n");
     while((bytes=fread(m_LineBuffer,1,sizeof(m_LineBuffer),in))>0)
     {
         CurPos=m_LineBuffer;
@@ -317,7 +317,7 @@ printf("Char,InCMode,EscPoint,InLineComment,InStr,InComment,CommentEscPoint\n");
         {
             c=*CurPos++;
 
-printf("\n%c,%d,%d,%d,%d,%d,%d,",(c<32 || c>126)?'.':c,InCMode,EscPoint,InLineComment,InStr,InComment,CommentEscPoint);
+//printf("\n%c,%d,%d,%d,%d,%d,%d,",(c<32 || c>126)?'.':c,InCMode,EscPoint,InLineComment,InStr,InComment,CommentEscPoint);
 
             /* Ignore \r */
             if(c=='\r')
