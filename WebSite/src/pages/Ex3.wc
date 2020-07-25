@@ -90,7 +90,7 @@ void Page_Ex3(void)
 
     StartPage(NULL,NULL);
 
-//<span class='CodeFrag'>?&gt;</span>
+//<span class='code'>?&gt;</span>
 ?>
 <h2>Description</h2>
 <p>This example shows including a graphic in a WebC project.</p>
@@ -101,12 +101,12 @@ the png file in it.  It will also set the MIME type to the correct (based
 on file extension) for the type of file it is.</p>
 
 <h2>WebC Code</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex3HTML); ?>
 </pre>
 
 <h2>C Code</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex3CCode); ?>
 </pre>
 

@@ -53,7 +53,7 @@ int main(void)
     SocketsCon_InitSocketConSystem();
     WS_Init();
 
-    if(!WS_Start(3000))
+    if(!WS_Start(8080))
     {
         printf("Failed to start web server\n");
         return 0;

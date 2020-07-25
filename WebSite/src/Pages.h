@@ -47,6 +47,8 @@ typedef enum
     e_Page_About,
     e_Page_Contact,
     e_Page_Downloads,
+    e_Page_Documentation,
+    e_Page_License,
     e_Page_Examples,
     e_Page_Ex1,
     e_Page_Ex2,
@@ -85,6 +87,8 @@ void Page_Links(void);
 void Page_About(void);
 void Page_Contact(void);
 void Page_Downloads(void);
+void Page_Documentation(void);
+void Page_License(void);
 void Page_Examples(void);
 void Page_Ex1(void);
 void Page_Ex2(void);

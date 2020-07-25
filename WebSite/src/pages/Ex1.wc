@@ -83,28 +83,28 @@ void Page_Ex1(void)
 ?>
 <h2>Description</h2>
 <p>This is a basic Hello World program.  It shows that WebC starts in HTML mode
-and then switches to C mode when it hits a <span class='CodeFrag'>&lt;?wc</span>
+and then switches to C mode when it hits a <span class='code'>&lt;?wc</span>
 .  It continues in C mode until it hits the closing
-<span class='CodeFrag'>?&gt;</span>.</p>
+<span class='code'>?&gt;</span>.</p>
 
 <p>You can also see the generated C code.  The C code writes a function
 named Page_<span style='color:green'>Filename</span>.  Where Filename is the name
-of the .wc file.  The C code then calls <span class='CodeFrag'>wcecho()</span>
+of the .wc file.  The C code then calls <span class='code'>wcecho()</span>
 function (which you must provide) to write the string out to the web server.
 And finally the C page function is closed (}).</p>
 
 <h2>WebC Code</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex1HTML); ?>
 </pre>
 
 <h2>C Code</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex1CCode); ?>
 </pre>
 
 <h2>Output</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex1Output); ?>
 </pre>
 

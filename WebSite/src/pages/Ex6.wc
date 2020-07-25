@@ -113,7 +113,7 @@ void Page_Ex6(void)
 
     StartPage(NULL,NULL);
 
-//<span class='CodeFrag'>?&gt;</span>
+//<span class='code'>?&gt;</span>
 ?>
 <h2>Description</h2>
 <p>This example shows a more complex use of WebC.  There are times when you
@@ -124,22 +124,22 @@ provide it your self.</p>
 a function (or any scope) then WebC will not write the function declaration
 and you must provide it your self.</p>
 
-<p>This is use full if you want to place any of your function after your
+<p>This is usefull if you want to place any of your function after your
 main HTML block or want to have a different naming convention that what WebC
 noramlly does.</p>
 
 <h2>WebC Code</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex6HTML); ?>
 </pre>
 
 <h2>C Code</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex6CCode); ?>
 </pre>
 
 <h2>Output</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex6Output); ?>
 </pre>
 

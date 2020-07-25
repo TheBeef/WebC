@@ -41,7 +41,7 @@ CC = gcc
 CC_FLAGS = -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors
 LNK_FLAGS = 
 
-WebCC = WebCC.exe
+WebCC = WebCCC
 WebCC_FLAGS = 
 
 # Final binary
@@ -133,27 +133,27 @@ void Page_ExMakefile(void)
 <p>This is an example makefile that you can use for your WebC projects.</p>
 
 <p>The makefile takes a list of source files.  If the extension ends in
-<span class='CodeFrag'>.wc</span> or one of the supported file types then
+<span class='code'>.wc</span> or one of the supported file types then
 the makefile will run the WebC processor to build a .c file in the
-<span class='CodeFrag'>build</span> directory.  The makefile will then
-build the <span class='CodeFrag'>.c</span> to a
-<span class='CodeFrag'>.o</span> and link the program.</p>
+<span class='code'>build</span> directory.  The makefile will then
+build the <span class='code'>.c</span> to a
+<span class='code'>.o</span> and link the program.</p>
 
 <p>Binary files are sent into WebC to be converted to
-<span class='CodeFrag'>.c</span>'s and then compiled as normal.</p>
+<span class='code'>.c</span>'s and then compiled as normal.</p>
 
 <h2>makefile</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCodeNoWC(ExMakefile); ?>
 </pre>
 
 <h2>Simple Hello World</h2>
 <h3>Files</h3>
-<pre class='Code'>
-src/HelloWorld.c
+<pre class='code'>
+src/HelloWorld.wc
 </pre>
 <h3>make</h3>
-<pre class='Code'>
+<pre class='code'>
 make
 
 echo WebCompiling "HelloWorld.wc"
@@ -175,21 +175,21 @@ mkdir -p build
 
 <h2>Building Graphics</h2>
 <h3>Files</h3>
-<pre class='Code'>
-src/HelloWorld.c
+<pre class='code'>
+src/main.c
 src/graphics/Picture.png
 </pre>
 <h3>make</h3>
-<pre class='Code'>
+<pre class='code'>
 make
 
 echo WebCompiling "Picture.png"
 WebCompiling Picture.png
 mkdir -p build/graphics
 <span class='HighlightCode'>../PreCompiler/WebCCC.exe  src/graphics/Picture.png -o build/graphics/Picture.c</span>
-echo Compiling HelloWorld.c
-Compiling HelloWorld.c
-gcc -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors  -I src -MMD -c build/HelloWorld.c -o build/HelloWorld.o
+echo Compiling main.c
+Compiling main.c
+gcc -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors  -I src -MMD -c build/main.c -o build/main.o
 echo Compiling Picture.c
 Compiling Picture.c
 <span class='HighlightCode'>gcc -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors  -I src -MMD -c build/graphics/Picture.c -o build/graphics/Picture.o</span>
@@ -198,7 +198,7 @@ Linking...
 # Create build directories - same structure as sources.
 mkdir -p build
 # Just link all the object files.
-<span class='HighlightCode'>gcc -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors ./build/HelloWorld.o ./build/BittyHTTP/SocketsCon.o ./build/BittyHTTP/WebServer.o ./build/FileServer.o -o HellowWorld.exe</span>
+<span class='HighlightCode'>gcc -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors ./build/main.o ./build/BittyHTTP/SocketsCon.o ./build/BittyHTTP/WebServer.o ./build/FileServer.o -o Graphics.exe</span>
 
 </pre>
 

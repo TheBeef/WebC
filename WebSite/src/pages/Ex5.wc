@@ -94,27 +94,27 @@ void Page_Ex5(void)
 
     StartPage(NULL,NULL);
 
-//<span class='CodeFrag'>?&gt;</span>
+//<span class='code'>?&gt;</span>
 ?>
 <h2>Description</h2>
 <p>This example shows use of the WebC strings.  Normally when enter a HTML block
-WebC wraps that block with a <span class='CodeFrag'>wcecho()</span>.  You can
-also end a block with a <span class='CodeFrag'>=?&gt;</span>.  This marks the
-HTML block as a string.  Instead of a <span class='CodeFrag'>wcecho()</span>
+WebC wraps that block with a <span class='code'>wcecho()</span>.  You can
+also end a block with a <span class='code'>=?&gt;</span>.  This marks the
+HTML block as a string.  Instead of a <span class='code'>wcecho()</span>
 instead the block will only be quoted into a string.
 
 <h2>WebC Code</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex5HTML); ?>
 </pre>
 
 <h2>C Code</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex5CCode); ?>
 </pre>
 
 <h2>Output</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex5Output); ?>
 </pre>
 

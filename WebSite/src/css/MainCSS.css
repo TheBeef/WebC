@@ -51,23 +51,8 @@ a
 div.MainBody
 {
     padding:0 10px;
-}
-
-.Code
-{
-    border:1px solid black;
-    margin:5px;
-    background-color:#E7E7E7;
-    color:black;
-    padding:5px;
-}
-
-.CodeFrag
-{
-    border:1px solid black;
-    background-color:#E7E7E7;
-    color:black;
-    padding:0 1px;
+    max-width:850px;
+    margin:0 auto;
 }
 
 .BreadCrumbs
@@ -81,3 +66,33 @@ div.MainBody
 {
     color:green;
 }
+
+span.code
+{
+    padding:1px;
+    margin:0px;
+}
+
+.code
+{
+    border-radius: 5px;
+    background-color:#e6ffe6;
+    border: solid #CCC 1px;
+    margin:5px;
+    color:black;
+    padding:5px;
+    overflow:auto;
+}
+
+.licensestyle
+{
+    background-color: #e0e0e0;
+    border: 1px solid black;
+    color: black;
+    font-family: monospace;
+    margin: 15px;
+    padding: 5px;
+    white-space: pre;
+    overflow:auto;
+}
+

@@ -59,8 +59,10 @@ void StartPage(const char *ExtraHEAD,const char *OverrideTitle)
 <div class='MainHeader'>
 <ul>
     <li><? OutputLink(e_Page_Index,"Home");?></li>
+    <li><? OutputLink(e_Page_Documentation,"Documentation");?></li>
     <li><? OutputLink(e_Page_Examples,"Examples");?></li>
     <li><? OutputLink(e_Page_Downloads,"Downloads");?></li>
+    <li><? OutputLink(e_Page_License,"License");?></li>
     <li><? OutputLink(e_Page_Links,"Links");?></li>
     <li><? OutputLink(e_Page_About,"About");?></li>
     <li><? OutputLink(e_Page_Contact,"Contact");?></li>

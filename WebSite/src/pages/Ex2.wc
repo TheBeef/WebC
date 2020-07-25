@@ -96,29 +96,29 @@ void Page_Ex2(void)
 
     StartPage(NULL,NULL);
 
-//<span class='CodeFrag'>?&gt;</span>
+//<span class='code'>?&gt;</span>
 ?>
 <h2>Description</h2>
 <p>This example shows using the global space at the top of a WebC file.
-When the first line of a WebC program is <span class='CodeFrag'>&lt;?wc</span>
+When the first line of a WebC program is <span class='code'>&lt;?wc</span>
 then instead of starting the page function WebC instead places this code
 into global space.</p>
 
 <p>You can also see that C99 variables are used to declare the
-<span class='CodeFrag'>buff</span> buffer in the middle of the function.</p>
+<span class='code'>buff</span> buffer in the middle of the function.</p>
 
 <h2>WebC Code</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex2HTML); ?>
 </pre>
 
 <h2>C Code</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex2CCode); ?>
 </pre>
 
 <h2>Output</h2>
-<pre class='Code'>
+<pre class='code'>
 <?wc OutputHTMLExampleCode(Ex2Output); ?>
 </pre>
 

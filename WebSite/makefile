@@ -2,11 +2,11 @@ CC = gcc
 CC_FLAGS = -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors
 LNK_FLAGS = 
 
-WebCC = ../PreCompiler/WebCCC.exe
+WebCC = ../PreCompiler/WebCCC
 WebCC_FLAGS = 
 
 # Final binary
-BIN = WebCWebSite.exe
+BIN = WebCWebSite
 
 # Put all auto generated stuff to this build dir.
 BUILD_DIR = ./build
@@ -30,6 +30,8 @@ SOURCE = main.c \
 	pages/About.wc \
 	pages/Contact.wc \
 	pages/Downloads.wc \
+	pages/Documentation.wc \
+	pages/License.wc \
 	pages/Examples.wc \
 	pages/Ex1.wc \
 	pages/Ex2.wc \

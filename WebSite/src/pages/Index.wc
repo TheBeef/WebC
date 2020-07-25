@@ -47,7 +47,7 @@ for web development in the C programming language for embedded systems.</p>
 <p>Nice, but what does that mean? An example:</p>
 
 <h3>Example #1 An introductory example</h3>
-<pre class='Code'>
+<pre class='code'>
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;

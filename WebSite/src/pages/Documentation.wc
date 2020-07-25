@@ -1,0 +1,812 @@
+<?wc
+/*******************************************************************************
+ * FILENAME: Documentation.wc
+ *
+ * PROJECT:
+ *    WebC
+ *
+ * FILE DESCRIPTION:
+ *    This file has the main documentation page in it.
+ *
+ * COPYRIGHT:
+ *    Copyright (C) 2020  Paul Hutchinson
+ *
+ *    This file is part of WebC.
+ *
+ *    This WebC is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    This program is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * CREATED BY:
+ *    Paul Hutchinson (24 Jul 2020)
+ *
+ ******************************************************************************/
+
+/*** HEADER FILES TO INCLUDE  ***/
+#include "Pages.h"
+#include "pages/header.h"
+#include "Utils.h"
+#include <stdio.h>
+
+/*** DEFINES                  ***/
+
+/*** MACROS                   ***/
+
+/*** TYPE DEFINITIONS         ***/
+
+/*** FUNCTION PROTOTYPES      ***/
+void Doc_Output_Intro(void);
+void Doc_Output_Modes(void);
+void Doc_Output_ShortTags(void);
+void Doc_Output_Requirements(void);
+void Doc_Output_SupportFunctions(void);
+void Doc_Output_wcecho(void);
+void Doc_Output_wcwrite(void);
+void Doc_Output_wcSetMine(void);
+void Doc_Output_Compiling(void);
+void Doc_Output_BinaryFiles(void);
+void Doc_Output_ShortEcho(void);
+void Doc_Output_Strings(void);
+void Doc_Output_Functions(void);
+void Doc_Output_GlobalSpace(void);
+
+/*** VARIABLE DEFINITIONS     ***/
+int m_NextChap;
+
+struct ChapterInfo
+{
+    int Level;
+    const char *Name;
+    const char *Tag;
+    void (*Fn)(void);
+};
+
+struct ChapterInfo m_Chapters[]=
+{
+    {0,"Intro","Intro",Doc_Output_Intro},
+    {0,"Requirements","Requirements",Doc_Output_Requirements},
+    {1,"Support Functions","SupportFunctions",Doc_Output_SupportFunctions},
+    {2,"wcecho()","wcecho",Doc_Output_wcecho},
+    {2,"wcwrite()","wcwrite",Doc_Output_wcwrite},
+    {2,"wcSetMine()","wcSetMine",Doc_Output_wcSetMine},
+    {0,"Using the WebC precompiler","Compiling",Doc_Output_Compiling},
+    {0,"Modes (HTML/C)","Modes",Doc_Output_Modes},
+    {0,"Short Tags","ShortTags",Doc_Output_ShortTags},
+    {0,"Short Echo","ShortEcho",Doc_Output_ShortEcho},
+    {0,"Global Space","GlobalSpace",Doc_Output_GlobalSpace},
+    {0,"Strings","Strings",Doc_Output_Strings},
+    {0,"Binary Files","BinaryFiles",Doc_Output_BinaryFiles},
+    {0,"Page Functions","PageFunctions",Doc_Output_Functions},
+};
+
+void Doc_OutputChapHeader(void)
+{
+    char buff[200];
+    int h;
+
+    h=2+m_Chapters[m_NextChap].Level;
+
+    sprintf(buff,"<h%d id='Chap_%s'>%s</h%d>",h,m_Chapters[m_NextChap].Tag,
+            m_Chapters[m_NextChap].Name,h);
+    wcecho(buff);
+
+    m_NextChap++;
+}
+
+void Page_Documentation(void)
+{
+    int r;
+    char buff[200];
+    int LastLevel;
+
+    StartPage(NULL,NULL);
+
+    m_NextChap=0;
+
+    wcecho("<h3>Table of contents</h3>");
+
+    /* Output a table of contents */
+    LastLevel=-1;
+    for(r=0;r<sizeof(m_Chapters)/sizeof(struct ChapterInfo);r++)
+    {
+        if(m_Chapters[r].Level>LastLevel)
+            wcecho("<ul>\n");
+        while(m_Chapters[r].Level<LastLevel)
+        {
+            wcecho("</ul>\n");
+            LastLevel--;
+        }
+
+        sprintf(buff,"<li><a href='#Chap_%s'>%s</a></li>\n",m_Chapters[r].Tag,
+                m_Chapters[r].Name);
+        wcecho(buff);
+
+        LastLevel=m_Chapters[r].Level;
+    }
+    while(LastLevel>=0)
+    {
+        wcecho("</ul>");
+        LastLevel--;
+    }
+
+    /* Output all the sections */
+    for(r=0;r<sizeof(m_Chapters)/sizeof(struct ChapterInfo);r++)
+        m_Chapters[r].Fn();
+
+    EndPage();
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_Intro
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_Intro(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Intro section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_Intro(void)
+{
+    Doc_OutputChapHeader();
+?>
+<p>WebC is an open source precompiler to write dynamically generated web pages
+in the C language.  WebC works by "embedding" C code into the HTML source.
+The way this is done is by the source having different modes
+for each language.  The source is either in C mode or HTML mode and you switch
+between them as needed.</p>
+
+<p>A WebC file starts out in HTML mode.  If you do nothing else the WebC
+precompiler will take the whole file and output it to the web server.
+You switch to C code using the <span class='code'>&lt;?wc</span> tag and
+back to HTML mode using <span class='code'>?&gt;</span> tag.</p>
+
+<p>For example:</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello World</title>
+    </head>
+
+    <body>
+        `wc
+        /* This is C code */
+        wcecho("Hello World");
+        $
+    </body>
+</html>
+<?wc ); ?>
+</pre>
+
+<p>The file starts out in HTML mode so the WebC outputs all the lines to the
+web server until it finds a <span class='code'>&lt;?wc</span>.  At that point
+the WebC precompiler switches to C mode.</p>
+
+<p>Everything between the <span class='code'>&lt;?wc ?&gt;</span> tags will
+be C code.  You can put any valid C code in this block.
+<span class='code'>wcecho()</span> is a normal C function that sends a C
+string to the web server (you must provide this function, see below).</p>
+
+<p>When the WebC precompiler see the <span class='code'>?&gt;</span>
+it will switch back to HTML mode and send the rest of the file to the
+web server.  You can switch between the modes as many times as you wish.</p>
+
+<p>Because WebC is a precompiler all it will do is convert a WebC file into
+a C file.  You will then need to compile the output file with a standard C
+compiler.</p>
+
+<p>You can compile the above example with:</p>
+<pre class='code'>
+WebCCC example.wc -o example.c
+</pre>
+
+<p>Note:The WebCCC precompiler can be found in the PreCompiler directory</p>
+
+<p>This will make a example.c file that looks something like:</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+/*** GENERATED CODE FROM example.wc ***/
+#include "WCWebAPI.h"
+void Page_example(void)
+{
+    wcecho("<!DOCTYPE html>\n");
+    wcecho("<html>\n");
+    wcecho("    <head>\n");
+    wcecho("        <title>Hello World</title>\n");
+    wcecho("    </head>\n");
+    wcecho("\n");
+    wcecho("    <body>\n");
+        /* This is C code */
+        wcecho("Hello World");
+    wcecho("    </body>\n"
+    wcecho("</html>\n");
+}
+<?wc ); ?>
+</pre>
+
+<p>You can see that the HTML code was converted to a number wcecho() function
+calls and the C code is copied directly in the middle.  Note that the
+generated code also includes an #include for the "WCWebAPI.h" file.</p>
+
+<p>To compile the resulting file you will also need to provide a few support
+functions to connect the generated code to the web server.  This support
+code doesn't actually need to send to the web server, you could for example
+send the output to stdout if you wanted.</p>
+<p>The support functions you must provide are
+    <span class='code'>wcecho()</span>,
+    <span class='code'>wcwrite()</span>, and
+    <span class='code'>wcSetMine()</span>.  We will only provide a basic
+    <span class='code'>wcecho()</span> here, see
+    <a href="#Chap_SupportFunctions">Support Functions</a> for more information
+    on these support functions.
+</p>
+
+<p>Here are example support files that includes the needed functions set
+to output to stdout.</p>
+<p>WCWebAPI.c</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+#include "WCWebAPI.h"
+#include <stdio.h>
+void wcecho(const char *buff)
+{
+    printf("%s",buff);
+}
+
+void wcwrite(const unsigned char *bin,int Len)
+{
+}
+
+void wcSetMine(const char *Mime)
+{
+}
+<?wc ); ?>
+</pre>
+
+<p>WCWebAPI.h</p>
+<pre class='code'>
+void wcecho(const char *buff);
+void wcwrite(const unsigned char *bin,int Len);
+void wcSetMine(const char *Mime);
+</pre>
+
+<p>main.c</p>
+<pre class='code'>
+void Page_example(void);
+int main(void)
+{
+    /* Call the example page function */
+    Page_example();
+}
+</pre>
+
+<p>You can now compile using gcc:</p>
+<pre class='code'>
+gcc main.c example.c WCWebAPI.c
+</pre>
+
+<p>When you run a.out you will get:</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello World</title>
+    </head>
+
+    <body>
+Hello World
+    </body>
+</html>
+<?wc ); ?>
+</pre>
+
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_Modes
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_Modes(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Modes section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_Modes(void)
+{
+    Doc_OutputChapHeader();
+?>
+Modes
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_ShortTags
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_ShortTags(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Short Tags section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_ShortTags(void)
+{
+    Doc_OutputChapHeader();
+?>
+Short Tags
+<a href='/Ex7.wc'>Example</a>
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_BinaryFiles
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_BinaryFiles(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Binary Files section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_BinaryFiles(void)
+{
+    Doc_OutputChapHeader();
+?>
+Binary Files
+<a href='/Ex3.wc'>Example</a>
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_ShortEcho
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_ShortEcho(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Short Echo section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_ShortEcho(void)
+{
+    Doc_OutputChapHeader();
+?>
+ShortEcho
+<a href='/Ex4.wc'>Example</a>
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_Strings
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_Strings(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Strings section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_Strings(void)
+{
+    Doc_OutputChapHeader();
+?>
+Strings
+<a href='/Ex5.wc'>Example</a>
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_Functions
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_Functions(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Functions section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_Functions(void)
+{
+    Doc_OutputChapHeader();
+?>
+Functions
+<a href='/Ex6.wc'>Example</a>
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_GlobalSpace
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_GlobalSpace(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Global Space section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_GlobalSpace(void)
+{
+    Doc_OutputChapHeader();
+?>
+Global Space
+<a href='/Ex2.wc'>Example</a>
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_Requirements
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_Requirements(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Requirements section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_Requirements(void)
+{
+    Doc_OutputChapHeader();
+?>
+<p>WebC is a precompiler so you will also need a normal C/C++ compiler to build
+the output from WebC.</p>
+<p>You will also need a web server to serve the web pages.  This can be done as
+a CGI program or with an embedded web server.</p>
+<p>These doc's will be using <a href='http://bittyhttp.com/'>Bitty HTTP</a>
+as it's web server.</p>
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_SupportFunctions
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_SupportFunctions(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Support Functions section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_SupportFunctions(void)
+{
+    Doc_OutputChapHeader();
+?>
+<p>You must provide some support functions for WebC to work.  These are kept to
+a minimum.</p>
+<p>There are currently 3 functions that need to be provided.
+<span class='code'>wcecho()</span>, <span class='code'>wcwrite()</span>,
+and <span class='code'>wcSetMine()</span>.</p>
+<?wc
+}
+
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_wcecho
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_wcecho(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the wcecho() section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_wcecho(void)
+{
+    Doc_OutputChapHeader();
+?>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+/*******************************************************************************
+ * NAME:
+ *    wcecho
+ *
+ * SYNOPSIS:
+ *    void wcecho(const char *buff);
+ *
+ * PARAMETERS:
+ *    buff [I] -- The C string to send out of the web server.
+ *
+ * FUNCTION:
+ *    This function is called to output a string from WebC code.  This function
+ *    takes the C string sent in and sends this string to the web server to
+ *    send.
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    wcwrite(), wcSetMine()
+ ******************************************************************************/
+<?wc ); ?>
+</pre>
+<p>This is the function that the called from the WebC code to send a string.</p>
+<p>When you are writing your C code this is the function you call to send a
+string.</p>
+<p>The WebC precompiler will call this function to output the HTML blocks and
+when it does a short echo.</p>
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_wcwrite
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_wcwrite(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the wcwrite() section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_wcwrite(void)
+{
+    Doc_OutputChapHeader();
+?>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+/*******************************************************************************
+ * NAME:
+ *    wcwrite
+ *
+ * SYNOPSIS:
+ *    void wcwrite(const unsigned char *bin,int Len);
+ *
+ * PARAMETERS:
+ *    bin [I] -- A binary block to send
+ *    Len [I] -- The number of bytes in 'bin'
+ *
+ * FUNCTION:
+ *    This function is called to output binary data from WebC code.  This
+ *    function takes a pointer to binary data and sends it to the web server.
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    wcecho(), wcSetMine()
+ ******************************************************************************/
+<?wc ); ?>
+</pre>
+<p>This is the function that the called from the WebC code to send a binary
+file.</p>
+<p>The WebC precompiler will call this function to output binary files.</p>
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_wcSetMine
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_wcSetMine(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the wcSetMine() section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_wcSetMine(void)
+{
+    Doc_OutputChapHeader();
+?>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+/*******************************************************************************
+ * NAME:
+ *    wcSetMine
+ *
+ * SYNOPSIS:
+ *    void wcSetMine(const char *Mime);
+ *
+ * PARAMETERS:
+ *    Mime [I] -- The MIME type to set.  This is a string with the MIME
+ *                type in it.
+ *
+ * FUNCTION:
+ *    This function is called to set the MIME type for the current document.
+ *    This sets the 'Content-Type' in the HTML headers.
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    wcecho()
+ ******************************************************************************/
+<?wc ); ?>
+</pre>
+<p>This is the function that the called from the WebC code to set the
+'Content-Type' HTML header.</p>
+<p>The WebC precompiler will call this function for binary files.  WebC
+precompiler will guess what file type it is and call this function with
+the MIME type string for that type.</p>
+<p>The WebC precompiler can also be told to output a MIME type as an option.</p>
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    Doc_Output_Compiling
+ *
+ * SYNOPSIS:
+ *    void Doc_Output_Compiling(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Outputs the Compiling section
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void Doc_Output_Compiling(void)
+{
+    Doc_OutputChapHeader();
+?>
+<p>To compile a .wc to a .c you use the <span class='code'>WebCCC</span> command
+from the "PreCompiler" directory.</p>
+<p>The WebC precompiler takes the following arguments:</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+Usage:
+    WebCCC [options] file...
+Options:
+  --help                   Display this information.
+  -o <file>                Place the output into <file>.
+  -x <language>            Specify the language of the following input files.
+                           Supported values:
+                                c -- A C file
+                                c++ -- A C++ file
+                                wc -- A WebC file
+                                bin -- A binary file
+                                c-header -- A C header file
+  -m <mime type>           Overrides the auto detect of the mime type on binary files.
+<?wc ); ?>
+</pre>
+
+<p>So for example lets say you have the example.wc file:</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+HTML code.  `wc wcecho("C code."); $  HTML code again.
+<?wc ); ?>
+</pre>
+
+<p>You would compile this with the following line:</p>
+<pre class='code'>
+WebCCC example.wc -o out.c
+</pre>
+
+This will make a <span class='code'>out.c</span> file.
+
+<?wc
+}
