@@ -401,8 +401,19 @@ void Doc_Output_ShortTags(void)
 {
     Doc_OutputChapHeader();
 ?>
-Short Tags
-<a href='/Ex7.wc'>Example</a>
+<p>Short Tags are shortcuts so you don't have to write the whole
+<span class='code'>&lt;?wc</span> tag.  When short tags are enabled (they are
+by default) you can write code like:</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+This is HTML<br/>
+`
+wcecho("This is C code<br/>");
+$
+Back to HTML code<br/>
+<?wc ); ?>
+</pre>
+<p>See the short tags <a href='/Ex7.wc'>Example</a>.</p>
 <?wc
 }
 
@@ -429,8 +440,13 @@ void Doc_Output_BinaryFiles(void)
 {
     Doc_OutputChapHeader();
 ?>
-Binary Files
-<a href='/Ex3.wc'>Example</a>
+<p>The WebC precompiler can take a binary file and convert that to C code as
+well.  This is very useful when you want to include graphics or raw javascript
+into your web site.</p>
+<p>This is as simple as running the WebC precompiler and giving it a binary
+file as an input.  The WebC precompiler will look at the extension of the file
+and set the MIME type and convert the file to a hex array of bytes.</p>
+<p>See the binary file <a href='/Ex3.wc'>Example</a>.</p>
 <?wc
 }
 
@@ -457,8 +473,28 @@ void Doc_Output_ShortEcho(void)
 {
     Doc_OutputChapHeader();
 ?>
-ShortEcho
-<a href='/Ex4.wc'>Example</a>
+<p>Short echo is a shortcut where instead of having to enter C source mode and
+then call <span class='code'>wcecho()</span> to output a string variable you
+can just put the name of the string variable.</p>
+<p>For example consider the following code:</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+`wc
+User info:<br/>
+First Name:`wc wcecho(FirstName); $, `wc wcecho(LastName); $<br/>
+Addresss:`wc wcecho(Address); $<br/>
+<?wc ); ?>
+</pre>
+<p>You can instead us:</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+User info:<br/>
+First Name:`=FirstName$, `=LastName$<br/>
+Addresss:`Address $<br/>
+<?wc ); ?>
+</pre>
+<p>The second version is somewhat easier to read.</p>
+<p>See the short echo <a href='/Ex4.wc'>Example</a>.</p>
 <?wc
 }
 
@@ -485,7 +521,14 @@ void Doc_Output_Strings(void)
 {
     Doc_OutputChapHeader();
 ?>
-Strings
+<p>Most of the time WebC calls <span class='code'>wcecho()</span> to send any
+HTML it finds out to the web server.  However there are times when you want
+to treat the HTML source as a string instead of just sending it to the web
+server.  This is where WebC strings come into play.</p>
+<p>You mark an HTML block as a C string by ending your C block with a
+<span class='code'>=?&gt;</span> instead of the normal
+<span class='code'>?&gt;</span> tag.
+<p>See the short echo <a href='/Ex5.wc'>Example</a>.</p>
 <a href='/Ex5.wc'>Example</a>
 <?wc
 }
