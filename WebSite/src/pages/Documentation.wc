@@ -527,9 +527,39 @@ to treat the HTML source as a string instead of just sending it to the web
 server.  This is where WebC strings come into play.</p>
 <p>You mark an HTML block as a C string by ending your C block with a
 <span class='code'>=?&gt;</span> instead of the normal
-<span class='code'>?&gt;</span> tag.
-<p>See the short echo <a href='/Ex5.wc'>Example</a>.</p>
-<a href='/Ex5.wc'>Example</a>
+<span class='code'>?&gt;</span> tag.  WebC will place the next block of HTML
+in a C string until an open <span class='code'>&lt;?wc</span> tag is found.</p>
+<p>For example:</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+`wc
+void TestFn(void)
+{
+    printf("=$ <div class="block">
+        HTML
+        code
+        is
+        here
+    </div>`wc);
+}
+$
+<?wc ); ?>
+</pre>
+<p>This will make the following C code:</p>
+<pre class='code'>
+<?wc OutputHTMLExampleCode(=?>
+void TestFn(void)
+{
+    printf(" <div class="block">\n"
+"        HTML\n"
+"        code\n"
+"        is\n"
+"        here\n"
+"        </div>");
+}
+<?wc ); ?>
+</pre>
+<p>See the strings <a href='/Ex5.wc'>Example</a>.</p>
 <?wc
 }
 
@@ -556,8 +586,17 @@ void Doc_Output_Functions(void)
 {
     Doc_OutputChapHeader();
 ?>
-Functions
-<a href='/Ex6.wc'>Example</a>
+<p>Sometime you will want to replace the page function that WebC auto generates
+with your own.  Maybe you want to call a function before you start outputing
+any HTML.</p>
+<p>WebC will suppress the auto generated page function if the file begins with
+an open <span class='code'>&lt;?wc</span> tag and the first HTML block is
+inside a function (or any curly brackets).</p>
+<p>The WebC precompiler watches how many open braces ({) it see's.  If there
+is a switch to HTML tag when it is inside an open block it will suppress
+the auto generated page function.</p>
+
+<p>See the page function <a href='/Ex6.wc'>Example</a>.</p>
 <?wc
 }
 
@@ -584,8 +623,26 @@ void Doc_Output_GlobalSpace(void)
 {
     Doc_OutputChapHeader();
 ?>
-Global Space
-<a href='/Ex2.wc'>Example</a>
+<p>Global space is the space outside of any function.  Normally WebC places
+all C source code inside the page function.  There are a number of times
+when you want to place C source outside of this function and place it in
+the global space instead.  WebC lets you do this by starting the file with
+an open <span class='code'>&lt;?wc</span> tag at the very top of the file.</p>
+<p>The open <span class='code'>&lt;?wc</span> tag must at the very top of the
+file with no blank lines or space before it (it must be the first 4 chars).</p>
+<p>All the code in this first C source block will be added to the top of the
+C output file.  The page function will be output at the point that the first
+HTML source starts (when you close the C source block with the
+<span class='code'>?&gt;</span> tag). You may add #includes and any functions
+you want before the page function here.</p>
+<p>You can also access global space by adding a
+<span class='code'>&lt;?wc }</span> at the end of the last HTML source block.
+This will end the page function and drop into the space directly after the
+page function.  You can then add any C functions you want to use as this point.
+However if you close the C souce block (switching back to HTML source mode)
+the WebC precompiler will output <span class='code'>wcecho()</span> function
+calls for the remaining HTML.</p>
+<p>See the global space <a href='/Ex2.wc'>Example</a>.</p>
 <?wc
 }
 
