@@ -347,7 +347,34 @@ void Doc_Output_Modes(void)
 {
     Doc_OutputChapHeader();
 ?>
-Modes
+<p>WebC uses the idea of source code modes.  You are either in C source mode
+or HTML source mode.  You then switch between them as you build your web page.
+The WebC precompiler takes this markup code and converts it all to normal
+C code, which can be compiled by a standard C compiler.</p>
+<p>A WebC file starts off in HTML source mode.  You write normal HTML code
+as if it was a .html file.  When you get to the point where you want to switch
+to writing some C code you put a <span class='code'>&lt;?wc</span> tag.  From
+this point on the source will be in C mode and you write normal C code.
+When you want to switch back to HTML source you write a
+<span class='code'>?&gt;</span> tag.  You may switch back and forth between
+modes as many times as you would like.</p>
+<p>The WebC precompiler will convert the WebC code by adding an include at the
+top of the file, convert all HTML source code to strings that are sent to the
+<span class='code'>wcecho()</span> function, and adds a 
+<span class='code' style='white-space: nowrap'>void Page_{filename}(void)</span>
+function with all the code in it.</p>
+<p>There are a number of exceptions to what code is made by the WebC
+precompiler.  For example you can add your own #includes and global by
+starting a file with an open <span class='code'>&lt;?wc</span> tag.  The
+output code will now include this first block of C code above the Page
+function.</p>
+<p>
+See also:
+<ul>
+    <li><a href="#Chap_GlobalSpace">Global Space</a></li>
+    <li><a href="#Chap_Strings">Strings</a></li>
+    <li><a href="#Chap_PageFunctions">Page Functions</a></li>
+</ul>
 <?wc
 }
 
