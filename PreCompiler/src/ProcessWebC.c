@@ -400,6 +400,7 @@ static bool AnalyzeFile(FILE *in)
                                 case 2: // Looking for '>'
                                     if(c=='>')
                                         EndBlock=true;
+                                    EscPoint=0;
                                 break;
                             }
                             if(EndBlock)
