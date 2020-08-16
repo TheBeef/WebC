@@ -36,6 +36,7 @@
 #include "pages/header.h"
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <stdio.h>
 
 void OutputBreadCrumbs(e_PageType CurPage,bool First);
@@ -55,6 +56,8 @@ void StartPage(const char *ExtraHEAD,const char *OverrideTitle)
         wcecho(OverrideTitle);
     else
         wcecho(g_Pages[g_PageID].Title);
+    if(strcmp(g_Pages[g_PageID].Title,"WebC")!=0)
+        wcecho(" - WebC");
     wcecho("</title>");
     wcecho("<link rel = \"stylesheet\" type = \"text/css\" href = \"/css/MainCSS.css\" />\n");
     OutputTrackingCode();
