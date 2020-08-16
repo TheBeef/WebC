@@ -45,6 +45,7 @@ struct ExtLink
 struct ExtLink m_ExtLinks[]=
 {
     {"http://bittyhttp.com","BittyHTTP","A simple C web server"},
+    {"https://github.com/TheBeef/WebC","GitHub/BittyHTTP","The WebC GitHub page"},
     {"https://github.com/TheBeef/BittyHTTP","GitHub/BittyHTTP","The Bitty HTTP GitHub page"},
 };
 

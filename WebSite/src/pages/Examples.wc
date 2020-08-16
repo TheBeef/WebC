@@ -38,22 +38,32 @@
 void Page_Examples(void)
 {
     StartPage(NULL,NULL);
+?>
+<p>
+    This is a number of examples with explanations of how the code works and
+    the generated C code.
+</p>
+<p>
+    Include here is also and example makefile that will take .wc, .jpg, .gif,
+    and other files convert them (using WebC) to .c files and then compile
+    them using gcc.
+</p>
 
-    wcecho("<h2>WebC Coding Examples</h2>");
-    wcecho("<ul>");
-    wcecho("<li>");OutputLink(e_Page_Ex1,"Hello World");wcecho("</li>");
-    wcecho("<li>");OutputLink(e_Page_Ex2,"Globals");wcecho("</li>");
-    wcecho("<li>");OutputLink(e_Page_Ex3,"Graphic Files");wcecho("</li>");
-    wcecho("<li>");OutputLink(e_Page_Ex4,"Short Echo Tag");wcecho("</li>");
-    wcecho("<li>");OutputLink(e_Page_Ex5,"Strings");wcecho("</li>");
-    wcecho("<li>");OutputLink(e_Page_Ex6,"Page Functions");wcecho("</li>");
-    wcecho("<li>");OutputLink(e_Page_Ex7,"Short Tag");wcecho("</li>");
-    wcecho("</ul>");
+    <h2>WebC Coding Examples</h2>
+    <ul>
+    <li><?wc OutputLink(e_Page_Ex1,"Hello World"); ?></li>
+    <li><?wc OutputLink(e_Page_Ex2,"Globals"); ?></li>
+    <li><?wc OutputLink(e_Page_Ex3,"Graphic Files"); ?></li>
+    <li><?wc OutputLink(e_Page_Ex4,"Short Echo Tag"); ?></li>
+    <li><?wc OutputLink(e_Page_Ex5,"Strings"); ?></li>
+    <li><?wc OutputLink(e_Page_Ex6,"Page Functions"); ?></li>
+    <li><?wc OutputLink(e_Page_Ex7,"Short Tag"); ?></li>
+    </ul>
 
-    wcecho("<h2>Compiling Examples</h2>");
-    wcecho("<ul>");
-    wcecho("<li>");OutputLink(e_Page_ExMakefile,"Makefile");wcecho("</li>");
-    wcecho("</ul>");
-
+    <h2>Compiling Examples</h2>
+    <ul>
+    <li><?wc OutputLink(e_Page_ExMakefile,"Makefile"); ?></li>
+    </ul>
+<?wc
     EndPage();
 }

@@ -53,13 +53,13 @@ int main(void)
     SocketsCon_InitSocketConSystem();
     WS_Init();
 
-    if(!WS_Start(8080))
+    if(!WS_Start(3001))
     {
         printf("Failed to start web server\n");
         return 0;
     }
 
-    printf("Waiting for connections on port 3000\n");
+    printf("Waiting for connections on port 3001\n");
 
     g_Quit=false;
     while(!g_Quit)

@@ -51,10 +51,10 @@ INCLUDES = src
 
 # All .o files go to build dir.
 OBJ = $(SOURCE:%.c=$(BUILD_DIR)/%.o)
-$(foreach ext,$(WCExtList),$(eval OBJ := $(OBJ:%.$(ext)=$(BUILD_DIR)/%.o)))
+$(foreach ext,$(WCExtList),$(eval OBJ := $(OBJ:%.$(ext)=$(BUILD_DIR)/%_$(ext).o)))
 
 WCC = $(filter-out %.c,$(SOURCE))
-$(foreach ext,$(WCExtList),$(eval WCC := $(WCC:%.$(ext)=$(BUILD_DIR)/%.c)))
+$(foreach ext,$(WCExtList),$(eval WCC := $(WCC:%.$(ext)=$(BUILD_DIR)/%_$(ext).c)))
 
 # Gcc/Clang will create these .d files containing dependencies.
 DEP = $(OBJ:%.o=%.d)
@@ -90,7 +90,7 @@ $(BUILD_DIR)/%.o : $(BUILD_DIR)/%.c
 	$(CC) $(CC_FLAGS) $(CC_INCLUDE) -MMD -c $< -o $@
 
 define WebCCompile
-$(patsubst %.$(1),$(BUILD_DIR)/%.c,$(filter %.$(1),$(SOURCE))): $(BUILD_DIR)/%.c: $(SOURCE_DIR)/%.$(1)
+$(patsubst %.$(1),$(BUILD_DIR)/%_$(1).c,$(filter %.$(1),$(SOURCE))): $(BUILD_DIR)/%_$(1).c: $(SOURCE_DIR)/%.$(1)
 	echo WebCompiling "$$(notdir $$<)"
 	mkdir -p $$(@D)
 	$$(WebCC) $$(WebCC_FLAGS) $$< -o $$@

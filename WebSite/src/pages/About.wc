@@ -40,12 +40,47 @@ void Page_About(void)
     StartPage(NULL,NULL);
 ?>
 
-<pre>
-Stuff goes here...
-    * Why
-    * 
-
-</pre>
+<p>
+    WebC started as a test project to see if C could be made into something
+    like php.  The more I thought about this the more interesting this
+    became.  I then build a simple precompiler just to see.  It worked.
+    I though to my self, interesting, and abandoned it.
+</p>
+<p>
+    Later I was working on a project that had a web interface from C.  It was
+    going as normal, painfully.  C doesn't really handle complex strings
+    very well.  You always have to escape quotes, new lines, and a number
+    of other things.  This makes writing javascript or html in is a pain.
+    That got me thinking about the precompiler again.
+</p>
+<p>
+    After I was done the project I went and rewrote some of the web pages
+    using the precompiler to see how well it would work.  It turned out to
+    be much much easier than straight C.  This got me thinking about it
+    again, and things like how to handle #includes, globals, and the like.
+    The more I thought about it the more I liked it.
+</p>
+<p>
+    Then one day (after making another C program that used an embedded web
+    server) I took and started writing the WebC precompiler with support for
+    global space, auto converting of binary data.  This went well and I made
+    a number of examples of how it would be used.  I then put the project
+    aside again.
+</p>
+<p>
+    I was updating one of the programs I had written with direct html in C
+    strings and again I thought I should finish the WebC stuff.  I decided
+    to make a web site written in it (this one).  As I wrote the
+    web site I came up with a number of enhancements such as WebC
+    escape tags to output C strings instead of echoing the lines.
+</p>
+<p>
+    That is basically where WebC came from.  Since then I put it in a number
+    of C projects that use an embedded web server and have found it to be
+    very useful.  I have no idea how useful WebC is in the real world these
+    days (with even small embedded systems running Linux) but it is still
+    an interesting idea ;)
+</p>
 
 <?
     EndPage();

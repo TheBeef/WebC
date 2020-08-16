@@ -41,11 +41,14 @@ void Page_Contact(void)
     StartPage(NULL,NULL);
 ?>
 
-Contact info...
-<pre>
-You can contact me by email at paul@bittyhttp.com
-You can also access the project page on GitHub at https://github.com/TheBeef/BittyHTTP
-</pre>
+<p>
+    You can contact me by email at paul@bittyhttp.com
+</p>
+<p>
+    You can also access the project page on GitHub at
+    <a href='https://github.com/TheBeef/WebC'>https://github.com/TheBeef/WebC</a>
+</p>
+
 <?
     EndPage();
 }
