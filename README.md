@@ -24,4 +24,4 @@ What distinguishes WebC from other script languages (like PHP) is that it is com
 
 The best thing in using WebC is that it makes working with HTML in C **bearable**.
 
-You should check out the Examples to see how WebC is used.
+See the web site for documentation, examples, and more at <a href='http://webcprecompiler.com/'>http://webcprecompiler.com/</a>.

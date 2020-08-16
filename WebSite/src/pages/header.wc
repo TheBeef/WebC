@@ -6,7 +6,7 @@
  *    WebC
  *
  * FILE DESCRIPTION:
- *    
+ *    This support file for the headers on the web page.
  *
  * COPYRIGHT:
  *    Copyright (C) 2020  Paul Hutchinson
@@ -76,10 +76,10 @@ void StartPage(const char *ExtraHEAD,const char *OverrideTitle)
     <li><? OutputLink(e_Page_Contact,"Contact");?></li>
 </ul>
 </div>
-<div class="MainBody">
 <div class='BreadCrumbs'>
 <? OutputBreadCrumbs(g_PageID,true); ?>
 </div>
+<div class="MainBody">
 <h1><?=g_Pages[g_PageID].Title ?></h1>
 <?
 }
