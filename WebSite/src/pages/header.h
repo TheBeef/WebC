@@ -49,5 +49,7 @@
 /***  EXTERNAL FUNCTION PROTOTYPES     ***/
 void StartPage(const char *ExtraHEAD,const char *OverrideTitle);
 void EndPage(void);
+void TrackingCodeInit(void);
+void TrackingCodeFree(void);
 
 #endif

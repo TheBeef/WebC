@@ -36,8 +36,12 @@
 #include "pages/header.h"
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 void OutputBreadCrumbs(e_PageType CurPage,bool First);
+void OutputTrackingCode(void);
+
+char *m_TrackingCode=NULL;
 
 void StartPage(const char *ExtraHEAD,const char *OverrideTitle)
 {
@@ -53,6 +57,7 @@ void StartPage(const char *ExtraHEAD,const char *OverrideTitle)
         wcecho(g_Pages[g_PageID].Title);
     wcecho("</title>");
     wcecho("<link rel = \"stylesheet\" type = \"text/css\" href = \"/css/MainCSS.css\" />\n");
+    OutputTrackingCode();
 ?>
 </head>
 <body>
@@ -99,6 +104,103 @@ void OutputBreadCrumbs(e_PageType CurPage,bool First)
     {
         wcecho(g_Pages[CurPage].Title);
     }
+}
+
+/*******************************************************************************
+ * NAME:
+ *    OutputTrackingCode
+ *
+ * SYNOPSIS:
+ *    void OutputTrackingCode(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    This function outputs the tracking code that was loaded at startup.
+ *    If the tracking code could not be loaded this does nothing.
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void OutputTrackingCode(void)
+{
+    if(m_TrackingCode!=NULL)
+        wcecho(m_TrackingCode);
+}
+
+/*******************************************************************************
+ * NAME:
+ *    TrackingCodeInit
+ *
+ * SYNOPSIS:
+ *    void TrackingCodeInit(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Loads the tracking code from "TrackingCode.txt" into 'm_TrackingCode'
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void TrackingCodeInit(void)
+{
+    FILE *in;
+    int Size;
+
+    in=fopen("TrackingCode.txt","rb");
+    if(in==NULL)
+        return;
+
+    fseek(in,0,SEEK_END);
+    Size=ftell(in);
+    fseek(in,0,SEEK_SET);
+    m_TrackingCode=malloc(Size+1);
+    if(m_TrackingCode==NULL)
+    {
+        fclose(in);
+        return;
+    }
+    if(fread(m_TrackingCode,Size,1,in)!=1)
+    {
+        free(m_TrackingCode);
+        fclose(in);
+        m_TrackingCode=NULL;
+        return;
+    }
+    fclose(in);
+}
+
+/*******************************************************************************
+ * NAME:
+ *    TrackingCodeFree
+ *
+ * SYNOPSIS:
+ *    void TrackingCodeFree(void);
+ *
+ * PARAMETERS:
+ *    NONE
+ *
+ * FUNCTION:
+ *    Frees the tracking code that was loaded with TrackingCodeInit()
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void TrackingCodeFree(void)
+{
+    free(m_TrackingCode);
 }
 
 ?>

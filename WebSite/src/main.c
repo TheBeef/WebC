@@ -30,6 +30,7 @@
 /*** HEADER FILES TO INCLUDE  ***/
 #include "main.h"
 #include "BittyHTTP/WebServer.h"
+#include "pages/header.h"
 #include <stdint.h>
 #include <stdio.h>
 
@@ -61,6 +62,8 @@ int main(void)
 
     printf("Waiting for connections on port 3001\n");
 
+    TrackingCodeInit();
+
     g_Quit=false;
     while(!g_Quit)
     {
@@ -75,6 +78,7 @@ int main(void)
     while(ReadElapsedClock()-Waiting2End<3)
         WS_Tick();
 
+    TrackingCodeFree();
     WS_Shutdown();
     SocketsCon_ShutdownSocketConSystem();
 
