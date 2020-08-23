@@ -41,11 +41,11 @@ CC = gcc
 CC_FLAGS = -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors
 LNK_FLAGS = 
 
-WebCC = WebCCC
+WebCC = webcc
 WebCC_FLAGS = 
 
 # Final binary
-BIN = Example.exe
+BIN = Example
 
 # Put all auto generated stuff to this build dir.
 BUILD_DIR = ./build
@@ -69,10 +69,10 @@ INCLUDES = src
 
 # All .o files go to build dir.
 OBJ = $(SOURCE:%.c=$(BUILD_DIR)/%.o)
-$(foreach ext,$(WCExtList),$(eval OBJ := $(OBJ:%.$(ext)=$(BUILD_DIR)/%.o)))
+$(foreach ext,$(WCExtList),$(eval OBJ := $(OBJ:%.$(ext)=$(BUILD_DIR)/%_$(ext).o)))
 
 WCC = $(filter-out %.c,$(SOURCE))
-$(foreach ext,$(WCExtList),$(eval WCC := $(WCC:%.$(ext)=$(BUILD_DIR)/%.c)))
+$(foreach ext,$(WCExtList),$(eval WCC := $(WCC:%.$(ext)=$(BUILD_DIR)/%_$(ext).c)))
 
 # Gcc/Clang will create these .d files containing dependencies.
 DEP = $(OBJ:%.o=%.d)
@@ -95,7 +95,7 @@ $(BUILD_DIR)/$(BIN) : $(WCC) $(OBJ)
 
 # Build target for every single object file.
 # The potential dependency on header files is covered
-# by calling '-include $(DEP)'.
+# by calling `-include $(DEP)`.
 $(BUILD_DIR)/%.o : $(SOURCE_DIR)/%.c
 	echo Compiling $(notdir $<)
 	mkdir -p $(@D)
@@ -108,7 +108,7 @@ $(BUILD_DIR)/%.o : $(BUILD_DIR)/%.c
 	$(CC) $(CC_FLAGS) $(CC_INCLUDE) -MMD -c $< -o $@
 
 define WebCCompile
-$(patsubst %.$(1),$(BUILD_DIR)/%.c,$(filter %.$(1),$(SOURCE))): $(BUILD_DIR)/%.c: $(SOURCE_DIR)/%.$(1)
+$(patsubst %.$(1),$(BUILD_DIR)/%_$(1).c,$(filter %.$(1),$(SOURCE))): $(BUILD_DIR)/%_$(1).c: $(SOURCE_DIR)/%.$(1)
 	echo WebCompiling "$$(notdir $$<)"
 	mkdir -p $$(@D)
 	$$(WebCC) $$(WebCC_FLAGS) $$< -o $$@
@@ -159,7 +159,7 @@ make
 echo WebCompiling "HelloWorld.wc"
 WebCompiling HelloWorld.wc
 mkdir -p build
-<span class='HighlightCode'>../PreCompiler/WebCCC.exe  src/HelloWorld.wc -o build/HelloWorld.c</span>
+<span class='HighlightCode'>webcc  src/HelloWorld.wc -o build/HelloWorld.c</span>
 echo Compiling HelloWorld.c
 Compiling HelloWorld.c
 <span class='HighlightCode'>gcc -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors  -I src -MMD -c build/HelloWorld.c -o build/HelloWorld.o</span>
@@ -186,7 +186,7 @@ make
 echo WebCompiling "Picture.png"
 WebCompiling Picture.png
 mkdir -p build/graphics
-<span class='HighlightCode'>../PreCompiler/WebCCC.exe  src/graphics/Picture.png -o build/graphics/Picture.c</span>
+<span class='HighlightCode'>webcc  src/graphics/Picture.png -o build/graphics/Picture.c</span>
 echo Compiling main.c
 Compiling main.c
 gcc -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors  -I src -MMD -c build/main.c -o build/main.o

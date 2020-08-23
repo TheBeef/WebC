@@ -1,0 +1,10 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Short Tag</title>
+    </head>
+    <body>
+        <?wc wcecho("This is the normal open tag"); ?><br/>
+        <? wcecho("This is the short tag"); ?><br/>
+    </body>
+</html>

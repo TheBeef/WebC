@@ -34,6 +34,7 @@
 #include "CmdLine.h"
 #include "SourceFiles.h"
 #include "Options.h"
+#include "Version.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -118,9 +119,10 @@ int ProcessArgs(int argv,char **argc)
             }
             else if(strcmp(argc[r],"--help")==0)
             {
-                printf("Usage: WebCCC [options] file...\n");
+                printf("Usage: webcc [options] file...\n");
                 printf("Options:\n");
                 printf("  --help                   Display this information.\n");
+                printf("  --version                Displays WebC version information\n");
                 printf("  -o <file>                Place the output into <file>.\n");
                 printf("  -x <language>            Specify the language of the following input files.\n");
                 printf("                           Supported values:\n");
@@ -130,6 +132,14 @@ int ProcessArgs(int argv,char **argc)
                 printf("                                bin -- A binary file\n");
                 printf("                                c-header -- A C header file\n");
                 printf("  -m <mime type>           Overrides the auto detect of the mime type on binary files.\n");
+            }
+            else if(strcmp(argc[r],"--version")==0)
+            {
+                printf("WebC %s\n",WEBC_VERSION_STR);
+                printf("Copyright (C) 2020 Paul Hutchinson.\n");
+                printf("This is free software; see the source for copying conditions.  There is NO\n");
+                printf("warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n");
+                return 0;
             }
             else
             {

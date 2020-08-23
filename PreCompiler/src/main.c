@@ -1,25 +1,3 @@
-/* TODO:
-    * Web Engine(s)
-        x stdio
-        x BittyHTTP
-        * CGI
-    * Binary to C
-    * Write Supporting files (main.c, pages.c)
-    * Standard functions????
-        * wcecho()
-        * wcwrite()
-        * wcSetMime()
-        GET[]?
-        POST[]?
-        COOKIE[]?
-        HEADERS[]?
-
-Block Rules:
-    * System starts in HTML mode
-    * <? ?> at top is global space
-    * any HTML goes into page function unless the C scope is > 0
-*/
-
 /*******************************************************************************
  * FILENAME: main.c
  *
@@ -27,7 +5,7 @@ Block Rules:
  *    WebC
  *
  * FILE DESCRIPTION:
- *    
+ *    Main entry point for program.
  *
  * COPYRIGHT:
  *    Copyright (C) 2020  Paul Hutchinson

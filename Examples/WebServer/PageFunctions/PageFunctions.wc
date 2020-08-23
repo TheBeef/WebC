@@ -1,0 +1,26 @@
+<?wc
+
+void RepeatAfterMe(int Times,const char *String);
+
+void MyPageFunction(void)
+{
+?>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Page Functions</title>
+    </head>
+    <body>
+        <?wc RepeatAfterMe(4,"Four is good<br/>"); ?>
+    </body>
+</html> <?wc ;
+}
+
+void RepeatAfterMe(int Times,const char *String)
+{
+    int r;
+
+    for(r=0;r<Times;r++)
+        wcecho(String);
+}
+?>

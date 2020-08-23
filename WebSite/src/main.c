@@ -5,10 +5,10 @@
  *    WebC
  *
  * FILE DESCRIPTION:
- *    This is an example main loop.
+ *    This is the main loop.
  *
  * COPYRIGHT:
- *    Copyright (C) 2019  Paul Hutchinson
+ *    Copyright (C) 2020  Paul Hutchinson
  *
  *    This file is part of WebC.
  *

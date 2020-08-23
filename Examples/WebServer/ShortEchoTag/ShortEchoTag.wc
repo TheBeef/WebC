@@ -1,0 +1,12 @@
+<?wc
+const char *UserName="Ben";
+?>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Short Echo Tag</title>
+    </head>
+    <body>
+        Hello <?=UserName?> welcome to WebC!
+    </body>
+</html>

@@ -2,7 +2,7 @@ CC = gcc
 CC_FLAGS = -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors
 LNK_FLAGS = 
 
-WebCC = ../PreCompiler/WebCCC
+WebCC = ../PreCompiler/webcc
 WebCC_FLAGS = 
 
 # Final binary
@@ -11,39 +11,41 @@ BIN = WebCWebSite
 # Put all auto generated stuff to this build dir.
 BUILD_DIR = ./build
 
-SOURCE_DIR = src
+SOURCE_DIR = ..
 
 WCExtList=wc png pdf css js apng bmp gif svg webp wav avi bin doc docx gz jar json jsonld \
 	mp3 mpeg odp ods odt oga ogv otf ppt pptx rar rtf swf tar ttf txt vsd woff woff2 xls \
 	xlsx zip 7z tiff tif ico cur jpg jpeg jfif pjpeg pjp
 
 # List of all the source files.
-SOURCE = main.c \
-	BittyHTTP/SocketsCon.c \
-	BittyHTTP/WebServer.c \
-	FileServer.c \
-	WCWebAPI.c \
-	Pages.c \
-	Utils.c \
-	pages/Index.wc \
-	pages/Links.wc \
-	pages/About.wc \
-	pages/Contact.wc \
-	pages/Downloads.wc \
-	pages/Documentation.wc \
-	pages/License.wc \
-	pages/Examples.wc \
-	pages/Ex1.wc \
-	pages/Ex2.wc \
-	pages/Ex3.wc \
-	pages/Ex4.wc \
-	pages/Ex5.wc \
-	pages/Ex6.wc \
-	pages/Ex7.wc \
-	pages/ExMakefile.wc \
-	pages/header.wc \
-	graphics/sport_soccer.png \
-	css/MainCSS.css \
+SOURCE = ReleaseNotes.c \
+	WebSite/src/main.c \
+	WebSite/src/BittyHTTP/SocketsCon.c \
+	WebSite/src/BittyHTTP/WebServer.c \
+	WebSite/src/FileServer.c \
+	WebSite/src/WCWebAPI.c \
+	WebSite/src/Pages.c \
+	WebSite/src/Utils.c \
+	WebSite/src/pages/Index.wc \
+	WebSite/src/pages/Links.wc \
+	WebSite/src/pages/About.wc \
+	WebSite/src/pages/Contact.wc \
+	WebSite/src/pages/Downloads.wc \
+	WebSite/src/pages/Documentation.wc \
+	WebSite/src/pages/License.wc \
+	WebSite/src/pages/Examples.wc \
+	WebSite/src/pages/Ex1.wc \
+	WebSite/src/pages/Ex2.wc \
+	WebSite/src/pages/Ex3.wc \
+	WebSite/src/pages/Ex4.wc \
+	WebSite/src/pages/Ex5.wc \
+	WebSite/src/pages/Ex6.wc \
+	WebSite/src/pages/Ex7.wc \
+	WebSite/src/pages/ExMakefile.wc \
+	WebSite/src/pages/DisplayReleaseNotes.wc \
+	WebSite/src/pages/header.wc \
+	WebSite/src/graphics/sport_soccer.png \
+	WebSite/src/css/MainCSS.css \
 
 INCLUDES = src
 

@@ -1,0 +1,15 @@
+<?wc
+const char *HTML = =?><p>
+This is all HTML.  You can use things like "quotes" and newlines
+and it will be added to the C string.
+</p><? ;
+?>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Strings</title>
+    </head>
+    <body>
+        <? wcecho(HTML); ?>
+    </body>
+</html> 

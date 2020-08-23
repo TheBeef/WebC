@@ -1,0 +1,20 @@
+<?wc
+#include <math.h>
+#include <stdio.h>
+
+double value=2;
+?>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Globals</title>
+    </head>
+    <body>
+        <?wc
+        char buff[100];
+        sprintf(buff,"sqrt(%f)=%f",value,sqrt(value));
+        wcecho(buff);
+        ?>
+    </body>
+</html> 
+

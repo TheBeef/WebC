@@ -37,7 +37,7 @@
 #include "Utils.h"
 
 const char *Ex3HTML= =?>
-WebCCC example.png
+webcc example.png
 <? ;
 
 const char *Ex3CCode= =?>

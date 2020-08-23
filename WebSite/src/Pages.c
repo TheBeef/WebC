@@ -65,6 +65,7 @@ struct PageInfo g_Pages[e_PageMAX]=
     {"/Ex6.wc","Page Functions",            e_Page_Examples,    NULL,NULL,NULL,Page_Ex6},
     {"/Ex7.wc","Short Tag",                 e_Page_Examples,    NULL,NULL,NULL,Page_Ex7},
     {"/ExMakefile.wc","Makefile",           e_Page_Examples,    NULL,NULL,NULL,Page_ExMakefile},
+    {"/ReleaseNotes.wc","Release Notes",    e_Page_Downloads,   NULL,NULL,NULL,Page_DisplayReleaseNotes},
 };
 
 void OutputLink(e_PageType PageID,const char *LinkTxt)

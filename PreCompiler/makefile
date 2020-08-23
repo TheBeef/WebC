@@ -3,7 +3,7 @@ CC_FLAGS = -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 
 LNK_FLAGS = 
 
 # Final binary
-BIN = WebCCC
+BIN = webcc
 
 # Put all auto generated stuff to this build dir.
 BUILD_DIR = ./build

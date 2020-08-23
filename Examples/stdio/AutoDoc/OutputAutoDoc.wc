@@ -1,0 +1,248 @@
+<?wc
+/*******************************************************************************
+ * FILENAME: OutputAutoDoc.wc
+ *
+ * PROJECT:
+ *    WebC
+ *
+ * FILE DESCRIPTION:
+ *    This file actually outputs the auto doc.
+ *
+ * COPYRIGHT:
+ *    Copyright (c) 2020 Paul Hutchinson
+ *
+ *    Permission is hereby granted, free of charge, to any person obtaining a copy
+ *    of this software and associated documentation files (the "Software"), to deal
+ *    in the Software without restriction, including without limitation the rights
+ *    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *    copies of the Software, and to permit persons to whom the Software is
+ *    furnished to do so, subject to the following conditions:
+ *    
+ *    The above copyright notice and this permission notice shall be included in all
+ *    copies or substantial portions of the Software.
+ *    
+ *    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *    SOFTWARE.
+ *
+ * CREATED BY:
+ *    Paul Hutchinson (22 Aug 2020)
+ *
+ ******************************************************************************/
+
+/*** HEADER FILES TO INCLUDE  ***/
+#include "CollectInfo.h"
+#include "HelperFunctions.h"
+#include "OutputAutoDoc.h"
+#include <string.h>
+#include <stdio.h>
+
+/*** DEFINES                  ***/
+#define WRAP_POS                        75
+
+/*** MACROS                   ***/
+
+/*** TYPE DEFINITIONS         ***/
+
+/*** FUNCTION PROTOTYPES      ***/
+void WrapText(const char *Text,int IndentCol,bool PreserveNewLines);
+void OutputArg(struct ArgInfo *Arg);
+
+/*** VARIABLE DEFINITIONS     ***/
+
+/*******************************************************************************
+ * NAME:
+ *    OutputAutoDoc
+ *
+ * SYNOPSIS:
+ *    void OutputAutoDoc(struct AutoDocInfo *Info);
+ *
+ * PARAMETERS:
+ *    Info [I] -- Info to fill into the auto doc.
+ *
+ * FUNCTION:
+ *    This function outputs an auto doc.  It is an example of using WebC
+ *    to fill in text.  Of note is that most of this function is text with
+ *    only a small amount of C code.
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void OutputAutoDoc(struct AutoDocInfo *Info)
+{
+    int arg;
+
+?>
+/*******************************************************************************
+ * NAME:
+ *    <?=Info->FnName?> 
+ *
+ * SYNOPSIS:
+ *    <?wc WrapText(Info->Prototype,12,false); ?> 
+ *
+ * PARAMETERS:
+<?wc
+    for(arg=0;arg<Info->ArgCount;arg++)
+    {
+        wcecho(" *    ");
+        OutputArg(&Info->Args[arg]);
+    }
+?>
+ *
+ * FUNCTION:
+ *    <?wc WrapText(Info->FnDescriptionBuff,6,true); ?> 
+ *
+ * RETURNS:
+ *    <?wc WrapText(Info->ReturnDesc,6,true); ?> 
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+<?wc
+}
+
+/*******************************************************************************
+ * NAME:
+ *    WrapText
+ *
+ * SYNOPSIS:
+ *    void WrapText(const char *Text,int IndentCol,bool PreserveNewLines);
+ *
+ * PARAMETERS:
+ *    Text [I] -- The text to wrap
+ *    IndentCol [I] -- The column to indent to.  A * will be output at the
+ *                     start of the row.
+ *    PreserveNewLines [I] -- If this is true then we output new lines when
+ *                            we find them.  If this is false then we replace
+ *                            the new line with a space.
+ *
+ * FUNCTION:
+ *    This function outputs a string wrapping the text at 'WRAP_POS'.  This
+ *    function will also output a " * " at the start of the line.
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void WrapText(const char *Text,int IndentCol,bool PreserveNewLines)
+{
+    const char *Pos;
+    const char *Start;
+    int Col;
+    int r;
+
+    Col=IndentCol;
+    Start=Text;
+    Pos=Start;
+    while(*Pos!=0)
+    {
+        if(*Pos=='\n')
+        {
+            /* Need to output everything except the \n */
+            if(Pos-Start>0)
+            {
+                wcwrite(Start,Pos-Start);
+            }
+            Start=Pos+1;
+            if(PreserveNewLines)
+            {
+                if(*(Pos+1)!=0)
+                {
+                    wcwrite("\n *",3);
+                    for(r=3;r<=IndentCol;r++)
+                        wcwrite(" ",1);
+                    Col=IndentCol;
+                }
+                Pos++;
+                continue;
+            }
+            else
+            {
+                wcwrite(" ",1);
+            }
+        }
+        if(Col<WRAP_POS)
+        {
+            Pos++;
+            Col++;
+        }
+        else
+        {
+            /* Wrap point */
+            /* Backup until we hit a white space */
+            while(Pos>Start && !IsWhileSpace(*Pos))
+            {
+                Pos--;
+                Col--;
+            }
+
+            if(Pos==Start)
+            {
+                /* Ok, no breaks */
+                wcwrite(Start,Col-IndentCol);
+                Start=Start+Col-IndentCol;
+            }
+            else
+            {
+                wcwrite(Start,Pos-Start);
+                Start=Pos;
+            }
+
+            wcwrite("\n *",3);
+            for(r=3;r<=IndentCol;r++)
+                wcwrite(" ",1);
+
+            /* Skip white space */
+            while(*Start!=0 && IsWhileSpace(*Start))
+            {
+                Start++;
+                Pos++;
+            }
+
+            Col=IndentCol;
+        }
+    }
+    /* Output what's left */
+    wcwrite(Start,Pos-Start);
+}
+
+/*******************************************************************************
+ * NAME:
+ *    OutputArg
+ *
+ * SYNOPSIS:
+ *    void OutputArg(struct ArgInfo *Arg);
+ *
+ * PARAMETERS:
+ *    Arg [I] -- The arg to output.
+ *
+ * FUNCTION:
+ *    This function outputs a arg from the 'struct ArgInfo' structure.
+ *    It will format it as needed.
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void OutputArg(struct ArgInfo *Arg)
+{
+    int Col;
+    wcecho(Arg->Name);
+    wcecho(" [");
+    wcecho(Arg->Dir);
+    wcecho("] -- ");
+    Col=6+strlen(Arg->Name)+2+strlen(Arg->Dir)+5;
+    WrapText(Arg->Desc,Col,false);
+    wcecho("\n");
+}

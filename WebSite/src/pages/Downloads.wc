@@ -34,28 +34,130 @@
 
 #include "Pages.h"
 #include "pages/header.h"
+#include "FileServer.h"
 #include <stdio.h>
+
+#define DOWNLOAD_PATH "../DownloadableFiles/"
 
 void Page_Downloads(void)
 {
     StartPage(NULL,NULL);
 ?>
 
-Downloads...
+<p>
+    You can download the precompiler the source to the precompiler or the source
+    to the website.
+</p>
 
-<pre>
- * Current Version
-     * Compiler
-        * Source
-        * Bin
-            * Linux
-            * Windows
-     * Examples
- * Past Versions
- * Web site
+<h2>Prebuilt compiler</h2>
+<p>
+    These are prebuilt precompilers for different platforms.  Some include
+    installers, some just the .exe you just run.
+</p>
+<ul>
+<li><a href='/Releases/Linux/WebCC.tar.gz'>Linux build</a></li>
+</ul>
 
-</pre>
+<h2>Examples</h2>
+<p>
+These are some example projects that use WebC.  The examples assume that
+the WebC precompiler has been installed already.
+</p>
+<ul>
+<li><a href='/Releases/Examples.tar.gz'>Examples</a></li>
+</ul>
+
+<h2>Makefile</h2>
+<p>
+    This is an example makefile that can handle converting .wc, .jpg, and other
+    file types into C files, and then compiling the .c files.
+</p>
+<p>
+    This is a good starting point for a new project that will use WebC.
+</p>
+<ul>
+<li><a href='/Releases/makefile'>makefile</a></li>
+</ul>
+
+<h2>Source</h2>
+<p>
+    This is the source to the current version of WebC.  You can also check out
+    the <a href='/ReleaseNotes.wc'>Release notes</a> for info about all releases.
+</p>
+<ul>
+<li><a href='/Releases/Source/WebCCSource.tar.gz'>Source</a></li>
+</ul>
+
+<h2>Website</h2>
+<ul>
+<li><a href='/Releases/WebSite/WebSite.tar.gz'>Web Site</a></li>
+</ul>
 
 <?
     EndPage();
 }
+
+/*******************************************************************************
+ * NAME:
+ *    SendDiskFile
+ *
+ * SYNOPSIS:
+ *    void SendDiskFile(struct WebServer *Web,const char *Filename,bool Binary);
+ *
+ * PARAMETERS:
+ *    Web [I] -- The web server to work on
+ *    Filename [I] -- The file to open and send.
+ *    Binary [I] -- Is this file binary (if true then send as
+ *                  "application/octet-stream", else send as
+ *                  "text/plain").
+ *
+ * FUNCTION:
+ *    This function sends a file from the disk.
+ *
+ * RETURNS:
+ *    NONE
+ *
+ * SEE ALSO:
+ *    
+ ******************************************************************************/
+void SendDiskFile(struct WebServer *Web,const char *Filename,bool Binary)
+{
+    FILE *in;
+    char buff[1000];
+    int bytes;
+
+    if(Binary)
+        WS_Header(Web,"Content-Type: application/octet-stream");
+    else
+        WS_Header(Web,"Content-Type: text/plain");
+
+    in=fopen(Filename,"rb");
+    if(in==NULL)
+        return;
+
+    while((bytes=fread(buff,1,sizeof(buff),in))>0)
+        WS_WriteChunk(Web,buff,bytes);
+
+    fclose(in);
+}
+
+void Page_LinuxWebCC(void)
+{
+    SendDiskFile(g_Web,DOWNLOAD_PATH "Releases/WebCC.tar.gz",true);
+}
+
+void Page_SourceWebCC(void)
+{
+    SendDiskFile(g_Web,DOWNLOAD_PATH "Releases/WebCCSource.tar.gz",true);
+}
+
+void Page_ExampleDownload(void)
+{
+    SendDiskFile(g_Web,DOWNLOAD_PATH "Releases/Examples.tar.gz",true);
+}
+
+void Page_WebSiteDownload(void)
+{
+    SendDiskFile(g_Web,DOWNLOAD_PATH "Releases/WebSite.tar.gz",true);
+}
+

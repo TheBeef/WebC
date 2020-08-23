@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <title>Graphics View</title>
+   </head>
+   <body>
+	<p>This example shows compiling of a graphics (binary) file.</p>
+
+	<p>The graphic:<br/>
+		<img src='/sport_soccer.png' />
+	</p>
+   </body>
+</html> 

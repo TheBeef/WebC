@@ -217,10 +217,10 @@ compiler.</p>
 
 <p>You can compile the above example with:</p>
 <pre class='code'>
-WebCCC example.wc -o example.c
+webcc example.wc -o example.c
 </pre>
 
-<p>Note:The WebCCC precompiler can be found in the PreCompiler directory</p>
+<p>Note:The WebC precompiler can be found in the PreCompiler directory</p>
 
 <p>This will make a example.c file that looks something like:</p>
 <pre class='code'>
@@ -900,13 +900,13 @@ void Doc_Output_Compiling(void)
 {
     Doc_OutputChapHeader();
 ?>
-<p>To compile a .wc to a .c you use the <span class='code'>WebCCC</span> command
+<p>To compile a .wc to a .c you use the <span class='code'>webcc</span> command
 from the "PreCompiler" directory.</p>
 <p>The WebC precompiler takes the following arguments:</p>
 <pre class='code'>
 <?wc OutputHTMLExampleCode(=?>
 Usage:
-    WebCCC [options] file...
+    webcc [options] file...
 Options:
   --help                   Display this information.
   -o <file>                Place the output into <file>.
@@ -930,7 +930,7 @@ HTML code.  `wc wcecho("C code."); $  HTML code again.
 
 <p>You would compile this with the following line:</p>
 <pre class='code'>
-WebCCC example.wc -o out.c
+webcc example.wc -o out.c
 </pre>
 
 This will make a <span class='code'>out.c</span> file.

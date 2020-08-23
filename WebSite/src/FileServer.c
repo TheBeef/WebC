@@ -55,6 +55,10 @@ struct OtherInfo m_Other[]=
 {
     {"/css/MainCSS.css",Page_MainCSS},
     {"/graphics/sport_soccer.png",Page_sport_soccer},
+    {"/Releases/Linux/WebCC.tar.gz",Page_LinuxWebCC},
+    {"/Releases/Source/WebCCSource.tar.gz",Page_SourceWebCC},
+    {"/Releases/Examples.tar.gz",Page_ExampleDownload},
+    {"/Releases/WebSite/WebSite.tar.gz",Page_WebSiteDownload},
 };
 
 struct WebServer *g_Web;
@@ -104,20 +108,7 @@ bool FS_GetFileProperties(const char *Filename,struct WSPageProp *PageProp)
 {
     int r;
 
-//    for(r=0;r<sizeof(m_Files)/sizeof(struct FileInfo);r++)
-//    {
-//        if(strcmp(Filename,m_Files[r].Filename)==0)
-//        {
-//            PageProp->FileID=(uintptr_t)&m_Files[r];
-//            PageProp->DynamicFile=m_Files[r].Dynamic;
-//            PageProp->Cookies=m_Files[r].Cookies;
-//            PageProp->Gets=m_Files[r].Gets;
-//            PageProp->Posts=m_Files[r].Posts;
-//            return true;
-//        }
-//    }
-
-    /* Check for graphics first */
+    /* Check for other files first */
     for(r=0;r<sizeof(m_Other)/sizeof(struct OtherInfo);r++)
     {
         if(strcmp(Filename,m_Other[r].Filename)==0)

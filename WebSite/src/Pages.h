@@ -58,6 +58,7 @@ typedef enum
     e_Page_Ex6,
     e_Page_Ex7,
     e_Page_ExMakefile,
+    e_Page_ReleaseNotes,
     e_PageMAX
 } e_PageType;
 
@@ -98,8 +99,14 @@ void Page_Ex5(void);
 void Page_Ex6(void);
 void Page_Ex7(void);
 void Page_ExMakefile(void);
+void Page_DisplayReleaseNotes(void);
 
 void Page_MainCSS(void);
 void Page_sport_soccer(void);
+
+void Page_LinuxWebCC(void);
+void Page_SourceWebCC(void);
+void Page_ExampleDownload(void);
+void Page_WebSiteDownload(void);
 
 #endif

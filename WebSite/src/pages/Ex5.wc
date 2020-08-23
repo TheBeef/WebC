@@ -41,7 +41,7 @@ const char *Ex5HTML= =?>
 const char *HTML = =$<p>
 This is all HTML.  You can use things like "quotes" and newlines
 and it will be added to the C string.
-</p><?;
+</p>` ;
 $
 <!DOCTYPE HTML>
 <html>
