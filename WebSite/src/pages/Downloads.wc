@@ -37,7 +37,7 @@
 #include "FileServer.h"
 #include <stdio.h>
 
-#define DOWNLOAD_PATH "../DownloadableFiles/"
+#define DOWNLOAD_PATH "DownloadableFiles/"
 
 void Page_Downloads(void)
 {
