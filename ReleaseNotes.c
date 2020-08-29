@@ -61,7 +61,7 @@ static struct ReleaseNote m_Notes_1_0[]=
 
 const struct ReleaseInfo m_ReleaseNotes[]=
 {
-    {"1.0","19 Aug 2020","First Release",m_Notes_1_0,sizeof(m_Notes_1_0)/sizeof(struct ReleaseNote)},
+    {"1.0","29 Aug 2020","First Release",m_Notes_1_0,sizeof(m_Notes_1_0)/sizeof(struct ReleaseNote)},
 };
 
 const unsigned long m_ReleaseNoteCount=sizeof(m_ReleaseNotes)/sizeof(struct ReleaseInfo);
