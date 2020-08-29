@@ -96,7 +96,7 @@ int ProcessWebCFile(struct SourceFile *SFile,const char *OutFileName)
     if(RC>0)
         return RC;
 
-    in=fopen(SFile->Filename,"r");
+    in=fopen(SFile->Filename,"rb");
     if(in==NULL)
     {
         fprintf(stderr,"error: Can't open input file %s\n",SFile->Filename);

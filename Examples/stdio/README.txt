@@ -31,7 +31,7 @@ There are build.bat files in the directorys that compile using the TCC compiler.
 You need to install 'tcc' and 'webcc' and have them in the path.
 
 Needed software
-    * TCC (https://bellard.org/tcc/)
+    * gcc (http://www.mingw.org/wiki/Getting_Started)
     * WebC (http://webcprecompiler.com/)
 
 Compiling
