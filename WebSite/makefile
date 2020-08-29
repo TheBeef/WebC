@@ -2,7 +2,7 @@ CC = gcc
 CC_FLAGS = -fno-builtin-printf -std=gnu99 -g --short-enums -Wall -fmax-errors=1 -Wfatal-errors
 LNK_FLAGS = 
 
-WebCC = ../PreCompiler/webcc
+WebCC = webcc
 WebCC_FLAGS = 
 
 # Final binary

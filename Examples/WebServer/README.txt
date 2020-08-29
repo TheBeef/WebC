@@ -24,4 +24,4 @@ Compiling
     make -s
 
 Windows
-???
+    TBD
