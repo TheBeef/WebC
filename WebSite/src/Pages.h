@@ -105,6 +105,7 @@ void Page_MainCSS(void);
 void Page_sport_soccer(void);
 
 void Page_LinuxWebCC(void);
+void Page_WindowsWebCC(void);
 void Page_SourceWebCC(void);
 void Page_ExampleDownload(void);
 void Page_WebSiteDownload(void);

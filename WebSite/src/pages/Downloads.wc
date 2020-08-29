@@ -56,6 +56,7 @@ void Page_Downloads(void)
 </p>
 <ul>
 <li><a href='/Releases/Linux/WebCC.tar.gz'>Linux build</a></li>
+<li><a href='/Releases/Linux/WebCC.zip'>Windows 32bit build</a></li>
 </ul>
 
 <h2>Examples</h2>
@@ -144,6 +145,11 @@ void SendDiskFile(struct WebServer *Web,const char *Filename,bool Binary)
 void Page_LinuxWebCC(void)
 {
     SendDiskFile(g_Web,DOWNLOAD_PATH "Releases/WebCC.tar.gz",true);
+}
+
+void Page_WindowsWebCC(void)
+{
+    SendDiskFile(g_Web,DOWNLOAD_PATH "Releases/WebCC.zip",true);
 }
 
 void Page_SourceWebCC(void)

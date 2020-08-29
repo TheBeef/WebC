@@ -56,6 +56,7 @@ struct OtherInfo m_Other[]=
     {"/css/MainCSS.css",Page_MainCSS},
     {"/graphics/sport_soccer.png",Page_sport_soccer},
     {"/Releases/Linux/WebCC.tar.gz",Page_LinuxWebCC},
+    {"/Releases/Linux/WebCC.zip",Page_WindowsWebCC},
     {"/Releases/Source/WebCCSource.tar.gz",Page_SourceWebCC},
     {"/Releases/Examples.tar.gz",Page_ExampleDownload},
     {"/Releases/WebSite/WebSite.tar.gz",Page_WebSiteDownload},

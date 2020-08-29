@@ -28,13 +28,17 @@ the makefiles but you need GNU make and a version of GCC that works with
 windows.
 
 There are build.bat files in the directorys that compile using the TCC compiler.
-You need to install 'tcc' and 'webcc' and have them in the path.
+You need to install 'gcc' and 'webcc' and have them in the path.
 
 Needed software
     * gcc (http://www.mingw.org/wiki/Getting_Started)
     * WebC (http://webcprecompiler.com/)
 
-Compiling
-    cd HelloWorld
-    build.bat
+Compiling.
+    HelloWorld:
+        cd HelloWorld
+        build.bat
 
+    Others:
+        cd example_directory
+        make -s
