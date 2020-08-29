@@ -15,7 +15,9 @@ cp PreCompiler/install.sh WebCC
 tar -czf WebCC.tar.gz WebCC
 
 # ** Make website tar
-tar -czf WebSite.tar.gz WebSite
+mkdir WebSiteSource
+mv WebSite WebSiteSource
+tar -czf WebSite.tar.gz WebSiteSource
 
 mkdir ReleaseFiles
 mv Examples.tar.gz ReleaseFiles
