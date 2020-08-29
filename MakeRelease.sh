@@ -1,4 +1,5 @@
 #!/bin/bash
+echo This should be run a fresh checkout of the repo as it moves files around and makes a general mess
 echo Packing up the Linux release
 cd PreCompiler
 make -s clean
@@ -16,7 +17,9 @@ tar -czf WebCC.tar.gz WebCC
 
 # ** Make website tar
 mkdir WebSiteSource
-mv WebSite WebSiteSource
+cp -r WebSite/ WebSiteSource/
+cp ReleaseNotes.c WebSiteSource
+cp ReleaseNotes.h WebSiteSource
 tar -czf WebSite.tar.gz WebSiteSource
 
 mkdir ReleaseFiles
