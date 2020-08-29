@@ -152,6 +152,11 @@ void Page_WindowsWebCC(void)
     SendDiskFile(g_Web,DOWNLOAD_PATH "Releases/WebCC.zip",true);
 }
 
+void Page_makefile(void)
+{
+    SendDiskFile(g_Web,DOWNLOAD_PATH "Releases/makefile",true);
+}
+
 void Page_SourceWebCC(void)
 {
     SendDiskFile(g_Web,DOWNLOAD_PATH "Releases/WebCCSource.tar.gz",true);
