@@ -81,6 +81,7 @@ extern e_PageType g_PageID;
 
 /***  EXTERNAL FUNCTION PROTOTYPES     ***/
 void OutputLink(e_PageType PageID,const char *LinkTxt);
+void OutputLinkWithAnchor(e_PageType PageID,const char *Anchor,const char *LinkTxt);
 void BuildLink(e_PageType PageID,const char *LinkTxt,char *outbuff,int MaxSize);
 
 void Page_Index(void);

@@ -490,7 +490,7 @@ Addresss:`wc wcecho(Address); $<br/>
 <?wc OutputHTMLExampleCode(=?>
 User info:<br/>
 First Name:`=FirstName$, `=LastName$<br/>
-Addresss:`Address $<br/>
+Addresss:`=Address $<br/>
 <?wc ); ?>
 </pre>
 <p>The second version is somewhat easier to read.</p>

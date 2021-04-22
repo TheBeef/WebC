@@ -77,6 +77,18 @@ void OutputLink(e_PageType PageID,const char *LinkTxt)
     wcecho("</a>");
 }
 
+void OutputLinkWithAnchor(e_PageType PageID,const char *Anchor,
+        const char *LinkTxt)
+{
+    wcecho("<a href='");
+    wcecho(g_Pages[PageID].URL);
+    wcecho("#");
+    wcecho(Anchor);
+    wcecho("'>");
+    wcecho(LinkTxt);
+    wcecho("</a>");
+}
+
 void BuildLink(e_PageType PageID,const char *LinkTxt,char *outbuff,int MaxSize)
 {
     snprintf(outbuff,MaxSize,"<a href='%s'>%s</a>",g_Pages[PageID].URL,

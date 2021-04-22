@@ -50,6 +50,11 @@ bool g_Quit;
 int main(void)
 {
     t_ElapsedTime Waiting2End;
+    fd_set rfds;
+    int MaxFD;
+    int r;
+    int HandleCount;
+    t_ConSocketHandle OSHandles[WS_OPT_MAX_CONNECTIONS+1];
 
     SocketsCon_InitSocketConSystem();
     WS_Init();
@@ -68,7 +73,21 @@ int main(void)
     while(!g_Quit)
     {
         WS_Tick();
-        usleep(1000);
+
+        /* Wait for traffic */
+        FD_ZERO(&rfds);
+
+        /* What handles are open may change each loop, so we think it all */
+        HandleCount=WS_GetOSSocketHandles(OSHandles);
+        MaxFD=0;
+        for(r=0;r<HandleCount;r++)
+        {
+            if(OSHandles[r]>MaxFD)
+                MaxFD=OSHandles[r];
+            FD_SET(OSHandles[r],&rfds);
+        }
+
+        select(MaxFD+1,&rfds,NULL,NULL,NULL);
     }
 
     printf("Quiting...\n");
