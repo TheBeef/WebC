@@ -32,6 +32,7 @@ An example is worth a 1000 words so:
 We then compile this with WebC using webcc example.wc, which makes the following C code.
 
 example.c:
+
     /*** GENERATED CODE FROM example.wc ***/
     #include "WCWebAPI.h"
     #include <stdio.h>
@@ -64,6 +65,7 @@ example.c:
 Next we compile the example.c file with a standard C compiler (you do need to provide the main(), wcecho() and WCWebAPI.h for it to link).
 
 When we run the executable it will output in the following HTML:
+
     <!DOCTYPE html>
     <html>
         <head>
@@ -102,6 +104,7 @@ See the web site for documentation, examples, and more at <a href='http://webcpr
 Here are the support files needed to make the above example actually compile and run. It only prints the output to stdout but by changing wcecho() you can do anything you like with it.
 
 main.c
+
     #include <stdio.h>
     
     void Page_example(void);
@@ -118,4 +121,5 @@ main.c
     }
 
 WCWebAPI.h
+
     void wcecho(const char *str);
