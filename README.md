@@ -94,7 +94,7 @@ When we run the executable it will output in the following HTML:
         </body>
     </html>
 
-##Tada!
+## Tada!
 
 As you can see instead of lots of commands to output HTML (as seen in normal C), WebC pages contain HTML with embedded C code that does "something" (in this case, output the nine times table). The WebC code is enclosed in special start and end processing instructions <?wc and ?> that allow you to jump into and out of "C mode".
 
