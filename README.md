@@ -4,6 +4,11 @@ WebC is a new open source C extension language that is especially suited for web
 An example is worth a 1000 words so:
 
 ## Example #1 An introductory example
+
+We start with a WebC program. This is a mix of HTML and C code.
+
+example.wc:
+
     <?wc
     #include <stdio.h>
     
