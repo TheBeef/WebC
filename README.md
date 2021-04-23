@@ -104,7 +104,7 @@ The best thing in using WebC is that it makes working with HTML in C **bearable*
 
 See the web site for documentation, examples, and more at <a href='http://webcprecompiler.com/'>http://webcprecompiler.com/</a>.
 
-##Support files
+## Support files
 
 Here are the support files needed to make the above example actually compile and run. It only prints the output to stdout but by changing wcecho() you can do anything you like with it.
 
