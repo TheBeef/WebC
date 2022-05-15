@@ -197,7 +197,7 @@ int ProcessBinFile(struct SourceFile *SFile,const char *OutFileName)
     }
 
     fprintf(out,"/*** GENERATED CODE FROM %s ***/\n",SFile->Filename);
-    fprintf(out,"#include <WCWebAPI.h>\n");
+    fprintf(out,"#include \"WCWebAPI.h\"\n");
     fprintf(out,"\n");
     fprintf(out,"unsigned char m_BinData_%s[]=",fnName);
     fprintf(out,"{\n");

@@ -51,6 +51,15 @@
 //    },
 //};
 
+static struct ReleaseNote m_Notes_Next[]=
+{
+    {
+         "Changed include style for binary files",
+         "The binary files where using <> for includes instead quotes. "
+         " Changed to quotes to match other includes."
+    },
+};
+
 static struct ReleaseNote m_Notes_1_0[]=
 {
     {
@@ -62,6 +71,7 @@ static struct ReleaseNote m_Notes_1_0[]=
 const struct ReleaseInfo m_ReleaseNotes[]=
 {
     {"1.0","29 Aug 2020","First Release",m_Notes_1_0,sizeof(m_Notes_1_0)/sizeof(struct ReleaseNote)},
+    {"x.x","","Next Release",m_Notes_Next,sizeof(m_Notes_Next)/sizeof(struct ReleaseNote)},
 };
 
 const unsigned long m_ReleaseNoteCount=sizeof(m_ReleaseNotes)/sizeof(struct ReleaseInfo);
