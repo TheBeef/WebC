@@ -1,0 +1,6 @@
+Examples/MongooseWebServer/mongoose.c
+Examples/MongooseWebServer/mongoose.h
+*.o
+*.bak
+*.d
+
